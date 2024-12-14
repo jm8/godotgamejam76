@@ -5,8 +5,18 @@ extends Node2D
 @onready var tower_being_placed = $TowerBeingPlaced
 @onready var pipe_tile_map = $PipeTileMap
 
+var hover_tile_posision = null
+
 const TowerScene = preload("res://tower.tscn")
 const PIPE_TILE_SOURCE_ID = 0
+const HOVER_PIPE_TILE_SOURCE_ID = 1
+
+enum ActionState {
+	TowerPlacing,
+	PipePlacing,
+}
+
+var action_state: ActionState = ActionState.TowerPlacing
 
 func _process(_delta: float) -> void:
 	if ui.selected_tower != null:
@@ -17,19 +27,26 @@ func _process(_delta: float) -> void:
 		tower_being_placed.visible = false
 
 	if Input.is_key_pressed(KEY_E):
-		Globulars.action_state = Globulars.ActionState.PipePlacing
+		action_state = ActionState.PipePlacing
 	else:
-		Globulars.action_state = Globulars.ActionState.TowerPlacing
+		action_state = ActionState.TowerPlacing
 
-	if Globulars.action_state == Globulars.ActionState.TowerPlacing:
+	if action_state == ActionState.TowerPlacing:
 		pipe_tile_map.modulate.a = 0.5
 		pipe_tile_map.z_index = 0
-	if Globulars.action_state == Globulars.ActionState.PipePlacing:
+	if action_state == ActionState.PipePlacing:
 		pipe_tile_map.modulate.a = 1
 		pipe_tile_map.z_index = 1
 
-	if Globulars.action_state == Globulars.ActionState.PipePlacing:
-		var tile_position = position_to_tile(get_global_mouse_position())
+	var tile_position = position_to_tile(get_global_mouse_position())
+	if hover_tile_posision != null and pipe_tile_map.get_cell_source_id(hover_tile_posision):
+		pipe_tile_map.erase_cell(hover_tile_posision)
+		hover_tile_posision = null
+	if action_state == ActionState.PipePlacing:
+		if !has_pipe(tile_position):
+			pipe_tile_map.set_cell(tile_position, HOVER_PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
+			hover_tile_posision = tile_position
+
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
 			print("placing pipe ", tile_position)
 			pipe_tile_map.set_cell(tile_position, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
@@ -53,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		handle_right_click(tile_position)
 
 func handle_left_click(pos: Vector2i):
-	if Globulars.action_state == Globulars.ActionState.TowerPlacing and ui.selected_tower != null and can_place_tower(pos):
+	if action_state == ActionState.TowerPlacing and ui.selected_tower != null and can_place_tower(pos):
 		var tower = create_tower(pos, ui.selected_tower)
 		add_child(tower)
 
