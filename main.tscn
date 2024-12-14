@@ -25,3 +25,6 @@ texture = ExtResource("1_hl6sv")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD///7/BgAAAAAAAAAAAP//BgAAAAAAAAAAAAAABgAAAAAAAAD//wAABgAAAAAAAAD+/wAABgAAAAAAAAD+////BgAAAAAAAAA=")
 tile_set = SubResource("TileSet_4ps7g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
