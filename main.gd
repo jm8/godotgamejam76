@@ -8,7 +8,7 @@ extends Node2D
 var hover_tile_posision = null
 
 const TowerScene = preload("res://tower.tscn")
-const PIPE_TILE_SOURCE_ID = 0
+const PIPE_TILE_SOURCE_ID = 4
 const HOVER_PIPE_TILE_SOURCE_ID = 1
 
 enum ActionState {
@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 		pipe_tile_map.z_index = 1
 
 	var tile_position = position_to_tile(get_global_mouse_position())
-	if hover_tile_posision != null and pipe_tile_map.get_cell_source_id(hover_tile_posision):
+	if hover_tile_posision != null and pipe_tile_map.get_cell_source_id(hover_tile_posision) == HOVER_PIPE_TILE_SOURCE_ID:
 		pipe_tile_map.erase_cell(hover_tile_posision)
 		hover_tile_posision = null
 	if action_state == ActionState.PipePlacing:
@@ -49,7 +49,7 @@ func _process(_delta: float) -> void:
 
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
 			print("placing pipe ", tile_position)
-			pipe_tile_map.set_cell(tile_position, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
+			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
 			print("removing pipe ", tile_position)
 			pipe_tile_map.erase_cell(tile_position)
