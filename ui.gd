@@ -19,8 +19,11 @@ func create_buttons():
 				tower_description.text = tower_type.description
 		)
 		button.pressed.connect(func():
-			selected_tower = tower_type
-			tower_description.text = tower_type.description
+			if selected_tower != null and selected_tower.name == tower_type.name:
+				selected_tower = null
+			else:
+				selected_tower = tower_type
+				tower_description.text = tower_type.description
 		)
 
 
