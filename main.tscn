@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=4 uid="uid://bol2ba5y41ryl"]
+[gd_scene load_steps=9 format=4 uid="uid://bol2ba5y41ryl"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d8iqm"]
 [ext_resource type="Texture2D" uid="uid://c0bj0bx6pqc13" path="res://icon.svg" id="1_hl6sv"]
 [ext_resource type="Texture2D" uid="uid://cd7kh6gkx87p" path="res://hexbig128.png" id="2_snsdc"]
 [ext_resource type="Texture2D" uid="uid://dvcs5h7tamv1b" path="res://quantum_computer.png" id="3_6lchj"]
+[ext_resource type="Texture2D" uid="uid://dt5ltt81t63ue" path="res://hexoutline.png" id="5_ovblc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bqilx"]
+texture = ExtResource("3_6lchj")
+texture_region_size = Vector2i(128, 111)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_86kr6"]
 texture = ExtResource("2_snsdc")
@@ -15,6 +21,7 @@ tile_shape = 3
 tile_offset_axis = 1
 tile_size = Vector2i(128, 111)
 sources/6 = SubResource("TileSetAtlasSource_86kr6")
+sources/2 = SubResource("TileSetAtlasSource_bqilx")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_d8iqm")
@@ -24,12 +31,13 @@ position = Vector2(-27, -7)
 texture = ExtResource("1_hl6sv")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAABgAAAAAAAAABAP//BgAAAAAAAAABAAAABgAAAAAAAAD/////BgAAAAAAAAAAAP//BgAAAAAAAAAAAAEABgAAAAAAAAD//wAABgAAAAAAAAA=")
+position = Vector2(-64, -55.5)
+tile_map_data = PackedByteArray("AAABAP//BgAAAAAAAAABAAAABgAAAAAAAAD/////BgAAAAAAAAAAAP//BgAAAAAAAAAAAAEABgAAAAAAAAD//wAABgAAAAAAAAAAAAAAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_4ps7g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
-[node name="QuantumComputer" type="Sprite2D" parent="."]
-position = Vector2(63, 55.5)
-texture = ExtResource("3_6lchj")
+[node name="SelectedHexagon" type="Sprite2D" parent="."]
+position = Vector2(-97, -55)
+texture = ExtResource("5_ovblc")
