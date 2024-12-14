@@ -65,3 +65,6 @@ script = ExtResource("5_otb3h")
 
 [node name="UI" parent="." instance=ExtResource("7_t056u")]
 tower_types = Array[ExtResource("8_0yrp6")]([SubResource("Resource_6flpy"), SubResource("Resource_nrsnl")])
+
+[node name="TowerBeingPlaced" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 0.196078)

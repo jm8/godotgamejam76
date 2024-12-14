@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmaihwolwmxgh"]
+[gd_scene load_steps=2 format=3 uid="uid://bmaihwolwmxgh"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
-[ext_resource type="Texture2D" uid="uid://dt5ltt81t63ue" path="res://hexoutline.png" id="1_jldmc"]
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
@@ -47,8 +46,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-
-[node name="SelectedHexagon" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-97, -55)
-texture = ExtResource("1_jldmc")

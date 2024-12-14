@@ -4,6 +4,8 @@ extends Node2D
 @onready var tower_description = %TowerDescription
 var CreateTowerButton = preload("res://create_tower_button.tscn")
 
+var selected_tower: TowerType
+
 func create_buttons():
 	for child in buttons.get_children():
 		child.queue_free()
@@ -13,10 +15,12 @@ func create_buttons():
 		button.tooltip_text = tower_type.name
 		buttons.add_child(button)
 		button.mouse_entered.connect(func():
-			tower_description.text = tower_type.description
+			if selected_tower == null:
+				tower_description.text = tower_type.description
 		)
 		button.pressed.connect(func():
-			print(tower_type.name)
+			selected_tower = tower_type
+			tower_description.text = tower_type.description
 		)
 
 
@@ -28,3 +32,7 @@ func create_buttons():
 
 func _ready() -> void:
 	create_buttons()
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		selected_tower = null
