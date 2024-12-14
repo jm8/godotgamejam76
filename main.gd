@@ -53,6 +53,21 @@ func _process(_delta: float) -> void:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
 			print("removing pipe ", tile_position)
 			pipe_tile_map.erase_cell(tile_position)
+			var neighbors = get_neighboring_cells(pipe_tile_map, tile_position).filter(func (neighbor):
+				return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
+			for neighbor in neighbors:
+				pipe_tile_map.set_cell(neighbor, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
+			pipe_tile_map.set_cells_terrain_connect(neighbors, 0, 0)
+
+func get_neighboring_cells(map: TileMapLayer, pos: Vector2i) -> Array[Vector2i]:
+	return [
+		map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
+		map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE),
+		map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE),
+		map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE),
+		map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE),
+		map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_SIDE),
+	]
 
 func position_to_tile(pos: Vector2) -> Vector2i:
 	var mouse_pos = tile_map.get_global_transform().inverse() * pos
