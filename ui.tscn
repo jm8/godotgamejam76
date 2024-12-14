@@ -1,8 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqhenjbs0gb5y"]
+[gd_scene load_steps=12 format=3 uid="uid://bqhenjbs0gb5y"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
 [ext_resource type="Texture2D" uid="uid://l7bu6rv8822x" path="res://left-arrow.png" id="2_c2y04"]
+[ext_resource type="Script" path="res://tower_type.gd" id="2_kjrny"]
 [ext_resource type="Texture2D" uid="uid://bpvhgy4lcpjiu" path="res://right-arrow.png" id="2_l8850"]
+[ext_resource type="PackedScene" uid="uid://bvn3ejb6iiia7" path="res://tower1.tscn" id="3_2qefs"]
+[ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="4_7ptnu"]
+[ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="5_b3ajt"]
+
+[sub_resource type="Resource" id="Resource_f37b2"]
+script = ExtResource("2_kjrny")
+name = "Tower 1"
+description = "First tower"
+texture = ExtResource("4_7ptnu")
+scene = ExtResource("3_2qefs")
+
+[sub_resource type="Resource" id="Resource_6u0ym"]
+script = ExtResource("2_kjrny")
+name = "Tower 2"
+description = "Second Tower"
+texture = ExtResource("5_b3ajt")
+scene = ExtResource("3_2qefs")
 
 [sub_resource type="FontFile" id="FontFile_ra3ge"]
 subpixel_positioning = 0
@@ -35,6 +53,7 @@ default_font_size = 32
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
+tower_types = Array[ExtResource("2_kjrny")]([SubResource("Resource_f37b2"), SubResource("Resource_6u0ym")])
 
 [node name="ScreenSpace" type="CanvasLayer" parent="."]
 

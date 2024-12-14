@@ -103,7 +103,7 @@ func has_pipe(tile_position: Vector2i) -> bool:
 	return pipe_tile_map.get_cell_source_id(tile_position) == PIPE_TILE_SOURCE_ID
 
 func create_tower(pos: Vector2i, tower_type: TowerType) -> Tower:
-	var tower = TowerScene.instantiate()
+	var tower = tower_type.scene.instantiate()
 	tower.tower_type = tower_type
 	tower.tower_tile_position = Vector2i(pos)
 	tower.global_position = tile_to_position(pos)

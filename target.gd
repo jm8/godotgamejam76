@@ -1,18 +1,11 @@
-extends Node2D
-class_name Tower
+extends Area2D
 
-@export var tower_type: TowerType
-	#set(value):
-		#$Sprite2D.texture = value.texture
-
-@export var tower_tile_position: Vector2i
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	add_to_group(Globulars.TOWER_GROUP)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	global_position = get_global_mouse_position()

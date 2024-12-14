@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://du8d576jeitn"]
+[gd_scene load_steps=19 format=4 uid="uid://du8d576jeitn"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d8iqm"]
 [ext_resource type="Texture2D" uid="uid://c0bj0bx6pqc13" path="res://icon.svg" id="1_hl6sv"]
@@ -10,9 +10,6 @@
 [ext_resource type="Script" path="res://camera_2d.gd" id="5_otb3h"]
 [ext_resource type="Texture2D" uid="uid://dngtl5cyn65dc" path="res://pipe.png" id="6_t7h3a"]
 [ext_resource type="PackedScene" uid="uid://bqhenjbs0gb5y" path="res://ui.tscn" id="7_t056u"]
-[ext_resource type="Script" path="res://tower_type.gd" id="8_0yrp6"]
-[ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="9_j7mbn"]
-[ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="10_rnomm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n32x6"]
 texture = ExtResource("6_t7h3a")
@@ -446,18 +443,6 @@ sources/6 = SubResource("TileSetAtlasSource_86kr6")
 sources/2 = SubResource("TileSetAtlasSource_bqilx")
 sources/0 = SubResource("TileSetAtlasSource_305xs")
 
-[sub_resource type="Resource" id="Resource_6flpy"]
-script = ExtResource("8_0yrp6")
-name = "Tower 1"
-description = "Tower 1 is the most firstest tower"
-texture = ExtResource("9_j7mbn")
-
-[sub_resource type="Resource" id="Resource_nrsnl"]
-script = ExtResource("8_0yrp6")
-name = "Tower 2"
-description = "The second tower, for when you want to feel a little more second"
-texture = ExtResource("10_rnomm")
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_d8iqm")
 
@@ -480,7 +465,6 @@ tile_set = SubResource("TileSet_4ps7g")
 script = ExtResource("5_otb3h")
 
 [node name="UI" parent="." instance=ExtResource("7_t056u")]
-tower_types = Array[ExtResource("8_0yrp6")]([SubResource("Resource_6flpy"), SubResource("Resource_nrsnl")])
 
 [node name="TowerBeingPlaced" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 0.196078)

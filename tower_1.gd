@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Tower
 
 var target: Area2D
 const fire_time: float = 0.5

@@ -9,6 +9,7 @@ var selected_tower: TowerType
 func create_buttons():
 	for child in buttons.get_children():
 		child.queue_free()
+	print(tower_types)
 	for tower_type in tower_types:
 		var button: Button = CreateTowerButton.instantiate()
 		button.icon = tower_type.texture
@@ -27,11 +28,11 @@ func create_buttons():
 		)
 
 
-@export var tower_types: Array[TowerType]:
-	set(value):
-		tower_types = value
-		if buttons != null:
-			create_buttons()
+@export var tower_types: Array[TowerType]
+	#set(value):
+		#tower_types = value
+		#if buttons != null:
+			#create_buttons()
 
 func _ready() -> void:
 	create_buttons()

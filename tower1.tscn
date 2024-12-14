@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvn3ejb6iiia7"]
+[gd_scene load_steps=6 format=3 uid="uid://bvn3ejb6iiia7"]
 
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="1_5jg0v"]
 [ext_resource type="Script" path="res://tower_1.gd" id="2_ytg6s"]
+[ext_resource type="Script" path="res://target.gd" id="3_xughf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4xva"]
 radius = 500.0
@@ -21,6 +22,7 @@ shape = SubResource("CircleShape2D_m4xva")
 
 [node name="Target" type="Area2D" parent="."]
 position = Vector2(100, -100)
+script = ExtResource("3_xughf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 shape = SubResource("CircleShape2D_kqioc")
