@@ -25,10 +25,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		handle_click(get_global_mouse_position())
 
 func handle_click(pos: Vector2):
-	var tower = create_tower(ui.selected_tower)
-	ui.selected_tower = null
-	tower.global_position = tile_to_position(position_to_tile(pos))
-	add_child(tower)
+	if ui.selected_tower != null:
+		var tower = create_tower(ui.selected_tower)
+		tower.global_position = tile_to_position(position_to_tile(pos))
+		add_child(tower)
 
 
 func create_tower(tower_type: TowerType):
