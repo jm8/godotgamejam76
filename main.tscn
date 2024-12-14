@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bol2ba5y41ryl"]
+[gd_scene load_steps=17 format=4 uid="uid://bol2ba5y41ryl"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d8iqm"]
 [ext_resource type="Texture2D" uid="uid://c0bj0bx6pqc13" path="res://icon.svg" id="1_hl6sv"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dvcs5h7tamv1b" path="res://quantum_computer.png" id="3_6lchj"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="5_otb3h"]
 [ext_resource type="PackedScene" uid="uid://bmaihwolwmxgh" path="res://ui.tscn" id="7_t056u"]
+[ext_resource type="Script" path="res://tower_type.gd" id="8_0yrp6"]
+[ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="9_j7mbn"]
+[ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="10_rnomm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_305xs"]
 texture = ExtResource("3_04l3s")
@@ -31,6 +34,18 @@ sources/6 = SubResource("TileSetAtlasSource_86kr6")
 sources/2 = SubResource("TileSetAtlasSource_bqilx")
 sources/0 = SubResource("TileSetAtlasSource_305xs")
 
+[sub_resource type="Resource" id="Resource_6flpy"]
+script = ExtResource("8_0yrp6")
+name = "Tower 1"
+description = "Tower 1 is the most firstest tower"
+texture = ExtResource("9_j7mbn")
+
+[sub_resource type="Resource" id="Resource_nrsnl"]
+script = ExtResource("8_0yrp6")
+name = "Tower 2"
+description = "The second tower, for when you want to feel a little more second"
+texture = ExtResource("10_rnomm")
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_d8iqm")
 
@@ -49,3 +64,4 @@ zoom = Vector2(0.5, 0.5)
 script = ExtResource("5_otb3h")
 
 [node name="UI" parent="." instance=ExtResource("7_t056u")]
+tower_types = Array[ExtResource("8_0yrp6")]([SubResource("Resource_6flpy"), SubResource("Resource_nrsnl")])

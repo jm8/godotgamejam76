@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://vywf8dbo6se0"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(115, 115)
+tooltip_text = "Tower 1"
+expand_icon = true

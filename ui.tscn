@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmaihwolwmxgh"]
+[gd_scene load_steps=3 format=3 uid="uid://bmaihwolwmxgh"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
 [ext_resource type="Texture2D" uid="uid://dt5ltt81t63ue" path="res://hexoutline.png" id="1_jldmc"]
-[ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="2_33lhc"]
-[ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="3_0qdo3"]
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
@@ -34,7 +32,8 @@ theme_override_constants/margin_bottom = 5
 [node name="GridContainer1" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="GridContainer2" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1"]
+[node name="TowerButtonsContainer" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
@@ -42,27 +41,12 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Button" type="Button" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1/GridContainer2"]
-custom_minimum_size = Vector2(115, 115)
-layout_mode = 2
-tooltip_text = "Tower 1"
-icon = ExtResource("2_33lhc")
-expand_icon = true
-
-[node name="Button2" type="Button" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1/GridContainer2"]
-custom_minimum_size = Vector2(115, 115)
-layout_mode = 2
-tooltip_text = "Tower 2"
-icon = ExtResource("3_0qdo3")
-expand_icon = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1"]
+[node name="TowerDescription" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "Hello
-"
 
 [node name="SelectedHexagon" type="Sprite2D" parent="."]
 visible = false
