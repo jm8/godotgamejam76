@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvn3ejb6iiia7"]
+
+[ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="1_5jg0v"]
+[ext_resource type="Script" path="res://tower_1.gd" id="2_ytg6s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m4xva"]
+radius = 500.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqioc"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(500, 500)
+texture = ExtResource("1_5jg0v")
+script = ExtResource("2_ytg6s")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1, 0.66)
+shape = SubResource("CircleShape2D_m4xva")
+
+[node name="Target" type="Area2D" parent="."]
+position = Vector2(100, -100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+shape = SubResource("CircleShape2D_kqioc")
+
+[node name="Laser" type="Line2D" parent="."]
+default_color = Color(1, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LaserSource" type="Marker2D" parent="."]
+position = Vector2(0, -41)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
