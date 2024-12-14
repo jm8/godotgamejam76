@@ -3,8 +3,10 @@ extends Node2D
 @onready var ui = $UI
 @onready var tile_map = $TileMapLayer
 @onready var tower_being_placed = $TowerBeingPlaced
+@onready var pipe_tile_map = $PipeTileMap
 
 const TowerScene = preload("res://tower.tscn")
+const PIPE_TILE_SOURCE_ID = 0
 
 func _process(_delta: float) -> void:
 	if ui.selected_tower != null:
@@ -14,22 +16,49 @@ func _process(_delta: float) -> void:
 	else:
 		tower_being_placed.visible = false
 
-func position_to_tile(pos: Vector2) -> Vector2:
+	if Input.is_key_pressed(KEY_E):
+		Globulars.action_state = Globulars.ActionState.PipePlacing
+	else:
+		Globulars.action_state = Globulars.ActionState.TowerPlacing
+
+	if Globulars.action_state == Globulars.ActionState.TowerPlacing:
+		pipe_tile_map.modulate.a = 0.5
+		pipe_tile_map.z_index = 0
+	if Globulars.action_state == Globulars.ActionState.PipePlacing:
+		pipe_tile_map.modulate.a = 1
+		pipe_tile_map.z_index = 1
+
+	if Globulars.action_state == Globulars.ActionState.PipePlacing:
+		var tile_position = position_to_tile(get_global_mouse_position())
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
+			print("placing pipe ", tile_position)
+			pipe_tile_map.set_cell(tile_position, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
+			print("removing pipe ", tile_position)
+			pipe_tile_map.erase_cell(tile_position)
+
+func position_to_tile(pos: Vector2) -> Vector2i:
 	var mouse_pos = tile_map.get_global_transform().inverse() * pos
 	var mouse_tile = tile_map.local_to_map(mouse_pos)
 	return mouse_tile
 
-func tile_to_position(tile: Vector2) -> Vector2:
+func tile_to_position(tile: Vector2i) -> Vector2:
 	return tile_map.get_global_transform() * tile_map.map_to_local(tile)
 
 func _unhandled_input(event: InputEvent) -> void:
+	var tile_position = position_to_tile(get_global_mouse_position())
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		handle_click(position_to_tile(get_global_mouse_position()))
+		handle_left_click(tile_position)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		handle_right_click(tile_position)
 
-func handle_click(pos: Vector2i):
-	if ui.selected_tower != null and can_place_tower(pos):
+func handle_left_click(pos: Vector2i):
+	if Globulars.action_state == Globulars.ActionState.TowerPlacing and ui.selected_tower != null and can_place_tower(pos):
 		var tower = create_tower(pos, ui.selected_tower)
 		add_child(tower)
+
+func handle_right_click(pos: Vector2i):
+	pass
 
 func can_place_tower(pos: Vector2i) -> bool:
 	var towers = get_tree().get_nodes_in_group(Globulars.TOWER_GROUP) as Array[Tower]
@@ -37,6 +66,9 @@ func can_place_tower(pos: Vector2i) -> bool:
 		if tower.tower_tile_position == pos:
 			return false
 	return true
+
+func has_pipe(tile_position: Vector2i) -> bool:
+	return pipe_tile_map.get_cell_source_id(tile_position) == PIPE_TILE_SOURCE_ID
 
 func create_tower(pos: Vector2i, tower_type: TowerType) -> Tower:
 	var tower = TowerScene.instantiate()

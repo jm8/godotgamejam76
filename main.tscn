@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://du8d576jeitn"]
+[gd_scene load_steps=20 format=4 uid="uid://du8d576jeitn"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d8iqm"]
 [ext_resource type="Texture2D" uid="uid://c0bj0bx6pqc13" path="res://icon.svg" id="1_hl6sv"]
@@ -6,10 +6,22 @@
 [ext_resource type="Texture2D" uid="uid://dyctloayib6li" path="res://hexbig128white.png" id="3_04l3s"]
 [ext_resource type="Texture2D" uid="uid://dvcs5h7tamv1b" path="res://quantum_computer.png" id="3_6lchj"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="5_otb3h"]
+[ext_resource type="Texture2D" uid="uid://dngtl5cyn65dc" path="res://pipe.png" id="6_t7h3a"]
 [ext_resource type="PackedScene" path="res://ui.tscn" id="7_t056u"]
 [ext_resource type="Script" path="res://tower_type.gd" id="8_0yrp6"]
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="9_j7mbn"]
 [ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="10_rnomm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n32x6"]
+texture = ExtResource("6_t7h3a")
+texture_region_size = Vector2i(128, 111)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6l7am"]
+tile_shape = 3
+tile_offset_axis = 1
+tile_size = Vector2i(128, 111)
+sources/0 = SubResource("TileSetAtlasSource_n32x6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_305xs"]
 texture = ExtResource("3_04l3s")
@@ -54,9 +66,14 @@ texture_filter = 2
 position = Vector2(-27, -7)
 texture = ExtResource("1_hl6sv")
 
+[node name="PipeTileMap" type="TileMapLayer" parent="."]
+position = Vector2(-64, -55.5)
+tile_map_data = PackedByteArray("AAD8////AAAAAAAAAAD/////AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_6l7am")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-64, -55.5)
-tile_map_data = PackedByteArray("AAABAP//BgAAAAAAAAABAAAABgAAAAAAAAD/////BgAAAAAAAAAAAP//BgAAAAAAAAAAAAEABgAAAAAAAAD//wAABgAAAAAAAAAAAAAAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAP//BgAAAAAAAAABAAAABgAAAAAAAAAAAP//BgAAAAAAAAAAAAEABgAAAAAAAAD//wAABgAAAAAAAAD/////BgAAAAAAAAAAAAAAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_4ps7g")
 
 [node name="Camera2D" type="Camera2D" parent="."]

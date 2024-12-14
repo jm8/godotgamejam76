@@ -5,3 +5,10 @@ var max_zoom = 1.0
 var zoom_change_factor = 0.1
 
 const TOWER_GROUP = "tower"
+
+enum ActionState {
+	TowerPlacing,
+	PipePlacing,
+}
+
+var action_state: ActionState = ActionState.TowerPlacing

@@ -3,8 +3,6 @@ class_name Tower
 
 @export var tower_type: TowerType:
 	set(value):
-		print(value)
-		print(value.texture)
 		$Sprite2D.texture = value.texture
 
 @export var tower_tile_position: Vector2i

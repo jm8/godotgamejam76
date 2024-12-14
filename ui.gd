@@ -37,7 +37,7 @@ func _ready() -> void:
 	create_buttons()
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
+	if event is InputEventKey and event.pressed && event.keycode == KEY_ESCAPE:
 		selected_tower = null
 
 func _on_close_button_pressed() -> void:
