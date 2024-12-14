@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnax868mpg7yy"]
+
+[ext_resource type="Texture2D" uid="uid://cno2ce610kouo" path="res://enemy.png" id="1_6thv7"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_et55a"]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_et55a")
+
+[node name="Enemy" type="Sprite2D" parent="."]
+texture = ExtResource("1_6thv7")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="RemoteTransform2D"]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="RemoteTransform2D/Path2D"]

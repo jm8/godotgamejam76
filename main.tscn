@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://du8d576jeitn"]
+[gd_scene load_steps=22 format=4 uid="uid://du8d576jeitn"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d8iqm"]
 [ext_resource type="Texture2D" uid="uid://c0bj0bx6pqc13" path="res://icon.svg" id="1_hl6sv"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dngtl5cyn65dc" path="res://pipe.png" id="6_t7h3a"]
 [ext_resource type="PackedScene" uid="uid://bqhenjbs0gb5y" path="res://ui.tscn" id="7_t056u"]
 [ext_resource type="Script" path="res://quantum-computer.gd" id="11_5hxtb"]
+[ext_resource type="PackedScene" uid="uid://dnax868mpg7yy" path="res://enemy.tscn" id="12_opv5i"]
+[ext_resource type="Curve2D" uid="uid://bdmxa8wxc0fqc" path="res://EnemyPath1.tres" id="13_jrtta"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n32x6"]
 texture = ExtResource("6_t7h3a")
@@ -472,3 +474,22 @@ modulate = Color(0, 1, 0, 0.196078)
 
 [node name="QuantumComputer" type="Node" parent="."]
 script = ExtResource("11_5hxtb")
+
+[node name="Enemy" parent="." instance=ExtResource("12_opv5i")]
+position = Vector2(788, -17)
+curve = ExtResource("13_jrtta")
+
+[node name="EnemyPath1Visualizer" type="Path2D" parent="."]
+curve = ExtResource("13_jrtta")
+
+[node name="Enemy2" parent="." instance=ExtResource("12_opv5i")]
+position = Vector2(788, -17)
+curve = ExtResource("13_jrtta")
+
+[node name="Enemy3" parent="." instance=ExtResource("12_opv5i")]
+position = Vector2(788, -17)
+curve = ExtResource("13_jrtta")
+
+[node name="Enemy4" parent="." instance=ExtResource("12_opv5i")]
+position = Vector2(788, -17)
+curve = ExtResource("13_jrtta")
