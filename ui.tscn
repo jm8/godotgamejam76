@@ -1,6 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmaihwolwmxgh"]
+[gd_scene load_steps=6 format=3 uid="uid://bmaihwolwmxgh"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
+[ext_resource type="Texture2D" uid="uid://l7bu6rv8822x" path="res://left-arrow.png" id="2_c2y04"]
+[ext_resource type="Texture2D" uid="uid://bpvhgy4lcpjiu" path="res://right-arrow.png" id="2_l8850"]
+
+[sub_resource type="FontFile" id="FontFile_ra3ge"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_q4a1y"]
+default_font = SubResource("FontFile_ra3ge")
+default_font_size = 32
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
@@ -8,6 +36,7 @@ script = ExtResource("1_7tofr")
 [node name="ScreenSpace" type="CanvasLayer" parent="."]
 
 [node name="RightPanel" type="Panel" parent="ScreenSpace"]
+visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -28,10 +57,22 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="GridContainer1" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="TowerButtonsContainer" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_q4a1y")
+text = "Close"
+icon = ExtResource("2_l8850")
+icon_alignment = 2
+expand_icon = true
+
+[node name="TowerButtonsContainer" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -40,9 +81,23 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="TowerDescription" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/GridContainer1"]
+[node name="TowerDescription" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
+
+[node name="OpenRightPanelButton" type="TextureButton" parent="ScreenSpace"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("2_c2y04")
+
+[connection signal="pressed" from="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="ScreenSpace/OpenRightPanelButton" to="." method="_on_open_right_panel_button_pressed"]

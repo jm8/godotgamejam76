@@ -36,3 +36,12 @@ func _ready() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		selected_tower = null
+
+func _on_close_button_pressed() -> void:
+	$ScreenSpace/RightPanel.visible = false
+	$ScreenSpace/OpenRightPanelButton.visible = true
+
+
+func _on_open_right_panel_button_pressed() -> void:
+	$ScreenSpace/RightPanel.visible = true
+	$ScreenSpace/OpenRightPanelButton.visible = false
