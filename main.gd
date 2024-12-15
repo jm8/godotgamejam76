@@ -50,14 +50,20 @@ func _process(_delta: float) -> void:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
 			print("placing pipe ", tile_position)
 			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
+			Globulars.pipes[tile_position] = Pipe.new()
+			Globulars.pipes[tile_position].temperature = randf() * 100
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
 			print("removing pipe ", tile_position)
 			pipe_tile_map.erase_cell(tile_position)
+			Globulars.pipes.erase(tile_position)
 			var neighbors = get_neighboring_cells(pipe_tile_map, tile_position).filter(func (neighbor):
 				return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
 			for neighbor in neighbors:
 				pipe_tile_map.set_cell(neighbor, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
 			pipe_tile_map.set_cells_terrain_connect(neighbors, 0, 0)
+
+func _physics_process(delta: float) -> void:
+	update_pipes(pipe_tile_map, delta)
 
 func get_neighboring_cells(map: TileMapLayer, pos: Vector2i) -> Array[Vector2i]:
 	return [
@@ -108,3 +114,18 @@ func create_tower(pos: Vector2i, tower_type: TowerType) -> Tower:
 	tower.tower_tile_position = Vector2i(pos)
 	tower.global_position = tile_to_position(pos)
 	return tower
+
+
+func update_pipes(map: TileMapLayer, delta: float):
+	# updates are order dependent, probably not a real issue
+	var sum = 0
+	for pos in Globulars.pipes:
+		print(pos, "    ", Globulars.pipes[pos].temperature)
+		sum += Globulars.pipes[pos].temperature
+		var neighbors = [
+			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
+			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE),
+			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE),
+		].filter(func (neighbor): return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
+		for neighbor in neighbors:
+			Globulars.average_temperature(pos, neighbor, delta)
