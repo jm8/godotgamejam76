@@ -18,7 +18,7 @@ func _physics_process(delta: float):
 	var pipe = Globulars.pipes.get(tower_tile_position)
 	if pipe:
 		Globulars.average_temperature_tower(pipe, self, delta)
-	print(self.temperature)
+	print("tower: ", self.temperature)
 	temperature -= 2 * delta
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

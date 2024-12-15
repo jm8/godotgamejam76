@@ -10,10 +10,8 @@ var cooldown_timer: float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print($Laser.points)
 	$Laser.add_point($LaserSource.position)
 	$Laser.add_point(Vector2(0, 0))
-	print($Laser.points)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +21,7 @@ func _process(delta: float) -> void:
 			if len($Laser.points) == 2:
 				$Laser.visible = true
 				$Laser.points[1] = to_local(target.global_position)
+				self.temperature -= 15 * delta
 		else:
 			$Laser.visible = false
 			fire_timer = 0
@@ -34,6 +33,8 @@ func _process(delta: float) -> void:
 		cooldown_timer = max(0,cooldown_timer - delta)
 		if cooldown_timer <= 0 and target:
 			fire_timer = fire_time
-
+	$TemperatureBar.value = temperature
+	
+	
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	target = area
