@@ -1,6 +1,5 @@
 extends Tower
 
-var target: Area2D
 const fire_time: float = 0.5
 const cooldown_time: float = 1
 
@@ -16,12 +15,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#print("targets " + name + ": ", get_tree().get_nodes_in_group("targets" + name))
+	var target: Enemy = get_tree().get_first_node_in_group("targets" + name)
 	if fire_timer > 0:
 		if target:
 			if len($Laser.points) == 2:
 				$Laser.visible = true
 				$Laser.points[1] = to_local(target.global_position)
 				self.temperature -= 15 * delta
+				target.health -= 10 * delta
 		else:
 			$Laser.visible = false
 			fire_timer = 0
@@ -37,4 +39,10 @@ func _process(delta: float) -> void:
 	
 	
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	target = area
+	if area.get_parent() is Enemy:
+		area.get_parent().add_to_group("targets" + name)
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.get_parent() is Enemy:
+		area.get_parent().remove_from_group("targets" + name)

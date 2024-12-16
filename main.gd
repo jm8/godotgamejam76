@@ -120,7 +120,7 @@ func update_pipes(map: TileMapLayer, delta: float):
 	# updates are order dependent, probably not a real issue
 	var sum = 0
 	for pos in Globulars.pipes:
-		print(pos, "    ", Globulars.pipes[pos].temperature)
+		#print(pos, "    ", Globulars.pipes[pos].temperature)
 		sum += Globulars.pipes[pos].temperature
 		var neighbors = [
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
