@@ -75,6 +75,7 @@ tower_types = Array[ExtResource("2_kjrny")]([SubResource("Resource_f37b2"), SubR
 [node name="ScreenSpace" type="CanvasLayer" parent="."]
 
 [node name="RightPanel" type="Panel" parent="ScreenSpace"]
+unique_name_in_owner = true
 visible = false
 anchors_preset = 11
 anchor_left = 1.0
@@ -103,6 +104,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_q4a1y")
@@ -111,7 +113,11 @@ icon = ExtResource("2_l8850")
 icon_alignment = 2
 expand_icon = true
 
-[node name="TowerButtonsContainer" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
+[node name="PlaceTowerMenu" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TowerButtonsContainer" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/PlaceTowerMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -120,14 +126,32 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="TowerDescription" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
+[node name="TowerDescription" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/PlaceTowerMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
 
+[node name="SelectedTowerMenu" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SelectedTowerDescription" type="RichTextLabel" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/SelectedTowerMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+
+[node name="DeleteButton" type="Button" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/SelectedTowerMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete"
+
 [node name="OpenRightPanelButton" type="TextureButton" parent="ScreenSpace"]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

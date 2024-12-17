@@ -11,7 +11,8 @@ const PROGRESS_HIGH = preload("res://progress_colors/high.tres")
 const PROGRESS_MEDIUM = preload("res://progress_colors/medium.tres")
 const PROGRESS_LOW = preload("res://progress_colors/low.tres")
 
-var pipes: Dictionary 
+var pipes: Dictionary
+var towers_by_position: Dictionary
 
 var crypto: float = 10
 var qc_heating: float = 0

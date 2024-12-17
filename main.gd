@@ -19,10 +19,10 @@ enum ActionState {
 var action_state: ActionState = ActionState.TowerPlacing
 
 func _process(_delta: float) -> void:
-	if ui.selected_tower != null:
+	if ui.placing_tower_type != null:
 		tower_being_placed.visible = true
 		tower_being_placed.global_position = tile_to_position(position_to_tile(get_global_mouse_position()))
-		tower_being_placed.texture = ui.selected_tower.texture
+		tower_being_placed.texture = ui.placing_tower_type.texture
 	else:
 		tower_being_placed.visible = false
 
@@ -67,7 +67,7 @@ func remove_pipe(tile_position: Vector2i) -> void:
 	pipe_tile_map.erase_cell(tile_position)
 	var pipe = Globulars.pipes[tile_position]
 	Globulars.pipes.erase(tile_position)
-	var neighbors = get_neighboring_cells(pipe_tile_map, tile_position).filter(func (neighbor):
+	var neighbors = get_neighboring_cells(pipe_tile_map, tile_position).filter(func(neighbor):
 		return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
 	for neighbor in neighbors:
 		pipe_tile_map.set_cell(neighbor, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
@@ -105,19 +105,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		handle_right_click(tile_position)
 
 func handle_left_click(pos: Vector2i):
-	if action_state == ActionState.TowerPlacing and ui.selected_tower != null and can_place_tower(pos):
-		var tower = create_tower(pos, ui.selected_tower)
+	if action_state == ActionState.TowerPlacing and ui.placing_tower_type != null and can_place_tower(pos):
+		var tower = create_tower(pos, ui.placing_tower_type)
 		add_child(tower)
+	elif action_state == ActionState.TowerPlacing and ui.placing_tower_type == null:
+		var tower = Globulars.towers_by_position.get(pos)
+		if tower != null:
+			ui.open_tower_panel(tower)
 
 func handle_right_click(pos: Vector2i):
 	pass
 
 func can_place_tower(pos: Vector2i) -> bool:
-	var towers = get_tree().get_nodes_in_group(Globulars.TOWER_GROUP) as Array[Tower]
-	for tower in towers:
-		if tower.tower_tile_position == pos:
-			return false
-	return true
+	return not Globulars.towers_by_position.has(pos)
 
 func has_pipe(tile_position: Vector2i) -> bool:
 	return pipe_tile_map.get_cell_source_id(tile_position) == PIPE_TILE_SOURCE_ID
@@ -127,6 +127,7 @@ func create_tower(pos: Vector2i, tower_type: TowerType) -> Tower:
 	tower.tower_type = tower_type
 	tower.tower_tile_position = Vector2i(pos)
 	tower.global_position = tile_to_position(pos)
+	Globulars.towers_by_position[pos] = tower
 	return tower
 
 
@@ -137,7 +138,7 @@ func update_pipes(map: TileMapLayer, delta: float):
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE),
-		].filter(func (neighbor): return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
+		].filter(func(neighbor): return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
 		for neighbor in neighbors:
 			Globulars.average_temperature(pos, neighbor, delta)
 		var pipe = Globulars.pipes[pos]
