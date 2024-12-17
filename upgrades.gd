@@ -19,9 +19,9 @@ func _ready() -> void:
 		b.connect("gui_input", func (event: InputEvent):
 			if event is InputEventMouseButton and event.button_mask & MOUSE_BUTTON_MASK_LEFT != 0:
 				var cost = floor(upgrade.base_price * pow(1.1, counts[i]))
-				if get_parent().get_parent().get_parent().crypto >= cost:
+				if Globulars.crypto >= cost:
 					counts[i] += 1
-					get_parent().get_parent().get_parent().crypto -= cost
+					Globulars.crypto -= cost
 					b.get_node("Right/Count").text = str(counts[i])
 					b.get_node("Right/Cost").text = str(floor(upgrade.base_price * pow(1.1, counts[i])))
 		)

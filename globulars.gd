@@ -13,6 +13,9 @@ const PROGRESS_LOW = preload("res://progress_colors/low.tres")
 
 var pipes: Dictionary 
 
+var crypto: float = 10
+var qc_heating: float = 0
+
 func average_temperature(a: Vector2i, b: Vector2i, delta: float):
 	var rate = min(pipes[a].transfer_rate, pipes[b].transfer_rate)
 	var difference = pipes[a].temperature - pipes[b].temperature
