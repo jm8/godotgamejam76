@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://du8d576jeitn"]
+[gd_scene load_steps=21 format=4 uid="uid://du8d576jeitn"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d8iqm"]
 [ext_resource type="Texture2D" uid="uid://c0bj0bx6pqc13" path="res://icon.svg" id="1_hl6sv"]
@@ -10,9 +10,8 @@
 [ext_resource type="Script" path="res://camera_2d.gd" id="5_otb3h"]
 [ext_resource type="Texture2D" uid="uid://dngtl5cyn65dc" path="res://pipe.png" id="6_t7h3a"]
 [ext_resource type="PackedScene" uid="uid://bqhenjbs0gb5y" path="res://ui.tscn" id="7_t056u"]
-[ext_resource type="PackedScene" uid="uid://dnax868mpg7yy" path="res://enemy.tscn" id="12_opv5i"]
-[ext_resource type="Curve2D" uid="uid://bdmxa8wxc0fqc" path="res://EnemyPath1.tres" id="13_jrtta"]
-[ext_resource type="PackedScene" uid="uid://dda8tbm871lc7" path="res://quantum_computer.tscn" id="13_ujn78"]
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="12_ujn84"]
+[ext_resource type="PackedScene" path="res://quantum_computer.tscn" id="13_ujn78"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n32x6"]
 texture = ExtResource("6_t7h3a")
@@ -472,23 +471,7 @@ script = ExtResource("5_otb3h")
 [node name="TowerBeingPlaced" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 0.196078)
 
-[node name="Enemy" parent="." instance=ExtResource("12_opv5i")]
-position = Vector2(788, -17)
-curve = ExtResource("13_jrtta")
-
-[node name="EnemyPath1Visualizer" type="Path2D" parent="."]
-curve = ExtResource("13_jrtta")
-
-[node name="Enemy2" parent="." instance=ExtResource("12_opv5i")]
-position = Vector2(788, -17)
-curve = ExtResource("13_jrtta")
-
-[node name="Enemy3" parent="." instance=ExtResource("12_opv5i")]
-position = Vector2(788, -17)
-curve = ExtResource("13_jrtta")
-
-[node name="Enemy4" parent="." instance=ExtResource("12_opv5i")]
-position = Vector2(788, -17)
-curve = ExtResource("13_jrtta")
-
 [node name="QuantumComputer" parent="." instance=ExtResource("13_ujn78")]
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("12_ujn84")

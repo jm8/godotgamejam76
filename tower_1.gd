@@ -47,11 +47,11 @@ func _process(delta: float) -> void:
 			$Laser.visible = false
 			fire_timer = 0
 		fire_timer = max(0, fire_timer - delta)
-		if(fire_timer <= 0):
+		if (fire_timer <= 0):
 			cooldown_timer = cooldown_time
 	else:
 		$Laser.visible = false
-		cooldown_timer = max(0,cooldown_timer - delta)
+		cooldown_timer = max(0, cooldown_timer - delta)
 		if cooldown_timer <= 0 and target:
 			fire_timer = fire_time
 
