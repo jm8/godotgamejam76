@@ -5,6 +5,11 @@ var max_zoom = 1.0
 var zoom_change_factor = 0.1
 
 const TOWER_GROUP = "tower"
+const PIPE_GROUP = "pipe"
+
+const PROGRESS_HIGH = preload("res://progress_colors/high.tres")
+const PROGRESS_MEDIUM = preload("res://progress_colors/medium.tres")
+const PROGRESS_LOW = preload("res://progress_colors/low.tres")
 
 var pipes: Dictionary 
 

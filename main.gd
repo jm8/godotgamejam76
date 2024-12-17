@@ -7,7 +7,7 @@ extends Node2D
 
 var hover_tile_posision = null
 
-const TowerScene = preload("res://tower.tscn")
+const PipeScene = preload("res://pipe.tscn")
 const PIPE_TILE_SOURCE_ID = 4
 const HOVER_PIPE_TILE_SOURCE_ID = 1
 
@@ -28,7 +28,9 @@ func _process(_delta: float) -> void:
 
 	if Input.is_key_pressed(KEY_E):
 		action_state = ActionState.PipePlacing
+		get_tree().call_group(Globulars.PIPE_GROUP, "display")
 	else:
+		get_tree().call_group(Globulars.PIPE_GROUP, "undisplay")
 		action_state = ActionState.TowerPlacing
 
 	if action_state == ActionState.TowerPlacing:
@@ -50,17 +52,29 @@ func _process(_delta: float) -> void:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
 			print("placing pipe ", tile_position)
 			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
-			Globulars.pipes[tile_position] = Pipe.new()
-			Globulars.pipes[tile_position].temperature = randf() * 100
+			var pipe = Pipe.new()
+			Globulars.pipes[tile_position] = pipe
+			var pipe_scene = PipeScene.instantiate()
+			pipe_scene.pipe = pipe
+			pipe_scene.global_position = tile_to_position(tile_position)
+			add_child(pipe_scene)
+
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
-			print("removing pipe ", tile_position)
-			pipe_tile_map.erase_cell(tile_position)
-			Globulars.pipes.erase(tile_position)
-			var neighbors = get_neighboring_cells(pipe_tile_map, tile_position).filter(func (neighbor):
-				return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
-			for neighbor in neighbors:
-				pipe_tile_map.set_cell(neighbor, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
-			pipe_tile_map.set_cells_terrain_connect(neighbors, 0, 0)
+			remove_pipe(tile_position)
+
+func remove_pipe(tile_position: Vector2i) -> void:
+	print("removing pipe ", tile_position)
+	pipe_tile_map.erase_cell(tile_position)
+	var pipe = Globulars.pipes[tile_position]
+	Globulars.pipes.erase(tile_position)
+	var neighbors = get_neighboring_cells(pipe_tile_map, tile_position).filter(func (neighbor):
+		return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
+	for neighbor in neighbors:
+		pipe_tile_map.set_cell(neighbor, PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
+	for pipe_scene in get_tree().get_nodes_in_group(Globulars.PIPE_GROUP):
+		if pipe_scene.pipe == pipe:
+			remove_child(pipe_scene)
+	pipe_tile_map.set_cells_terrain_connect(neighbors, 0, 0)
 
 func _physics_process(delta: float) -> void:
 	update_pipes(pipe_tile_map, delta)
@@ -118,10 +132,7 @@ func create_tower(pos: Vector2i, tower_type: TowerType) -> Tower:
 
 func update_pipes(map: TileMapLayer, delta: float):
 	# updates are order dependent, probably not a real issue
-	var sum = 0
 	for pos in Globulars.pipes:
-		#print(pos, "    ", Globulars.pipes[pos].temperature)
-		sum += Globulars.pipes[pos].temperature
 		var neighbors = [
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE),
@@ -129,3 +140,6 @@ func update_pipes(map: TileMapLayer, delta: float):
 		].filter(func (neighbor): return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
 		for neighbor in neighbors:
 			Globulars.average_temperature(pos, neighbor, delta)
+		var pipe = Globulars.pipes[pos]
+		if pipe.temperature < pipe.min_temperature:
+			remove_pipe(pos)
