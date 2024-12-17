@@ -17,7 +17,7 @@ func _physics_process(delta: float):
 	var pipe = Globulars.pipes.get(Vector2i(0, 0))
 	if pipe:
 		Globulars.average_temperature_qc(pipe, self, delta)
-	temperature += 20 * delta;
+	temperature += 200 * delta;
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

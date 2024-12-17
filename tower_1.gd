@@ -6,7 +6,6 @@ const cooldown_time: float = 1
 var fire_timer: float = 0
 var cooldown_timer: float = 1
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Laser.add_point($LaserSource.position)

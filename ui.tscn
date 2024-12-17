@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqhenjbs0gb5y"]
+[gd_scene load_steps=17 format=3 uid="uid://bqhenjbs0gb5y"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
 [ext_resource type="Texture2D" uid="uid://l7bu6rv8822x" path="res://left-arrow.png" id="2_c2y04"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bvn3ejb6iiia7" path="res://tower1.tscn" id="3_2qefs"]
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="4_7ptnu"]
 [ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="5_b3ajt"]
+[ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
+[ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
+[ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
 
 [sub_resource type="Resource" id="Resource_f37b2"]
 script = ExtResource("2_kjrny")
@@ -50,6 +53,20 @@ cache/0/32/0/scale = 1.0
 [sub_resource type="Theme" id="Theme_q4a1y"]
 default_font = SubResource("FontFile_ra3ge")
 default_font_size = 32
+
+[sub_resource type="Resource" id="Resource_lbyey"]
+script = ExtResource("10_leyrp")
+name = "ASIC"
+description = "Mine cryptocurrency on an application specific integrated circuit"
+base_price = 1
+tooltip = "this is my super cool fancy tool tip!!"
+
+[sub_resource type="Resource" id="Resource_pqsil"]
+script = ExtResource("10_leyrp")
+name = "CPU"
+description = "Mine cryptocurrency with a central processing unit"
+base_price = 5
+tooltip = "the processing unit in the center"
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
@@ -133,6 +150,66 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
+
+[node name="IdleGame" type="Panel" parent="ScreenSpace"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 275.0
+grow_vertical = 2
+script = ExtResource("8_xbyhy")
+
+[node name="LeftPanel" type="VBoxContainer" parent="ScreenSpace/IdleGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenSpace/IdleGame/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ResourceLabel" type="Label" parent="ScreenSpace/IdleGame/LeftPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Crypto: 420
+Classical: 69
+Quantum: 47"
+
+[node name="PowerLabel" type="Label" parent="ScreenSpace/IdleGame/LeftPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "47kW"
+horizontal_alignment = 2
+
+[node name="TabContainer" type="TabContainer" parent="ScreenSpace/IdleGame/LeftPanel"]
+layout_mode = 2
+current_tab = 1
+
+[node name="Actions" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Upgrades" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("9_wged7")
+upgrades = Array[ExtResource("10_leyrp")]([SubResource("Resource_lbyey"), SubResource("Resource_pqsil")])
+metadata/_tab_index = 1
+
+[node name="Research" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 
 [connection signal="pressed" from="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="ScreenSpace/OpenRightPanelButton" to="." method="_on_open_right_panel_button_pressed"]
