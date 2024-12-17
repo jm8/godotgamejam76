@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 Globulars="*res://globulars.gd"
 
+[layer_names]
+
+2d_physics/layer_1="enemy"
+2d_physics/layer_2="range"
+2d_physics/layer_3="qc"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

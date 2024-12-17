@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dda8tbm871lc7"]
+
+[ext_resource type="Script" path="res://quantum-computer.gd" id="1_2v4b3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gv41r"]
+radius = 57.1402
+
+[node name="QuantumComputer" type="Node2D"]
+script = ExtResource("1_2v4b3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gv41r")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

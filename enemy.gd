@@ -6,9 +6,11 @@ class_name Enemy
 var t = 0
 var offset = 40 * sqrt(randf()) * Vector2.from_angle(randf_range(0, TAU))
 
-var speed = 250
+var speed = 200
 
 var health = 10
+
+var qc_damage = 1
 
 func _process(delta: float) -> void:
 	t += delta

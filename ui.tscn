@@ -121,5 +121,18 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("2_c2y04")
 
+[node name="ProgressBar" type="ProgressBar" parent="ScreenSpace"]
+modulate = Color(0, 0.607843, 1, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_right = 198.0
+offset_bottom = 33.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+value = 50.0
+show_percentage = false
+
 [connection signal="pressed" from="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="ScreenSpace/OpenRightPanelButton" to="." method="_on_open_right_panel_button_pressed"]
