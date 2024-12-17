@@ -2,8 +2,6 @@ extends Node2D
 class_name Tower
 
 @export var tower_type: TowerType
-	#set(value):
-		#$Sprite2D.texture = value.texture
 
 @export var tower_tile_position: Vector2i
 
@@ -20,3 +18,7 @@ func _physics_process(delta: float):
 
 func _process(delta: float) -> void:
 	pass
+
+func delete():
+	Globulars.towers_by_position.erase(tower_tile_position)
+	queue_free()
