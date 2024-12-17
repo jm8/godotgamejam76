@@ -1,7 +1,8 @@
 extends Node
 class_name QuantumComputer;
 
-var temperature: float = 1000
+var temperature: float = 300
+var specific_heat: float = 10
 
 var max_health = 20
 var health = 20

@@ -142,5 +142,6 @@ func update_pipes(map: TileMapLayer, delta: float):
 		for neighbor in neighbors:
 			Globulars.average_temperature(pos, neighbor, delta)
 		var pipe = Globulars.pipes[pos]
+		pipe.temperature -= 2 * delta
 		if pipe.temperature < pipe.min_temperature:
 			remove_pipe(pos)

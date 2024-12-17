@@ -20,3 +20,11 @@ min_value = 200.0
 max_value = 400.0
 value = 260.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+z_index = 3
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3

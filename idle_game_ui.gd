@@ -13,9 +13,9 @@ func _process(delta: float) -> void:
 	var asics = %Upgrades.counts[0]
 	var cpus = %Upgrades.counts[1]
 	
-	Globulars.crypto += 1  * delta * asics
+	Globulars.crypto += 1 * delta * asics
 	
-	Globulars.qc_heating = asics + 1.5 * cpus
+	Globulars.qc_heating = asics + 1.5 * cpus + 1
 	
 	classical = %Upgrades.counts[1]
 	

@@ -9,6 +9,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	$Label.text = str(round(pipe.temperature * 100) / 100.)
 	$TemperatureBar.value = pipe.temperature
 	$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_LOW)
 	if pipe.temperature > pipe.min_temperature + (pipe.max_temperature - pipe.min_temperature) * 0.2:
