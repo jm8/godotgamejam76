@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvn3ejb6iiia7" path="res://tower1.tscn" id="3_2qefs"]
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="4_7ptnu"]
 [ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="5_b3ajt"]
+[ext_resource type="PackedScene" uid="uid://cilmso611f8h4" path="res://tower2.tscn" id="5_qa87a"]
 [ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
 [ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
 [ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
@@ -17,13 +18,19 @@ name = "Tower 1"
 description = "First tower"
 texture = ExtResource("4_7ptnu")
 scene = ExtResource("3_2qefs")
+min_temperature = 260.0
+operating_temperature = 261.0
+max_temperature = 400.0
 
 [sub_resource type="Resource" id="Resource_6u0ym"]
 script = ExtResource("2_kjrny")
 name = "Tower 2"
 description = "Second Tower"
 texture = ExtResource("5_b3ajt")
-scene = ExtResource("3_2qefs")
+scene = ExtResource("5_qa87a")
+min_temperature = 260.0
+operating_temperature = 261.0
+max_temperature = 400.0
 
 [sub_resource type="FontFile" id="FontFile_ra3ge"]
 subpixel_positioning = 0
@@ -280,6 +287,19 @@ metadata/_tab_index = 1
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="WaveInfo" type="Label" parent="ScreenSpace"]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+text = "wave info"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="ScreenSpace/OpenRightPanelButton" to="." method="_on_open_right_panel_button_pressed"]

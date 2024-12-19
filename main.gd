@@ -117,7 +117,7 @@ func handle_right_click(pos: Vector2i):
 	pass
 
 func can_place_tower(pos: Vector2i) -> bool:
-	return not Globulars.towers_by_position.has(pos)
+	return pos != Vector2i(0, 0) and not Globulars.towers_by_position.has(pos)
 
 func has_pipe(tile_position: Vector2i) -> bool:
 	return pipe_tile_map.get_cell_source_id(tile_position) == PIPE_TILE_SOURCE_ID
