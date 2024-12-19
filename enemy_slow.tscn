@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhrq12aiddrmv"]
+
+[ext_resource type="PackedScene" uid="uid://dnax868mpg7yy" path="res://enemy.tscn" id="1_xjlls"]
+
+[node name="Enemy" instance=ExtResource("1_xjlls")]
+enemy_name = "slow enemy"
+speed = 75
+health = 40
+qc_damage = 2

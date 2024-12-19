@@ -242,5 +242,18 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
+[node name="WaveInfo" type="Label" parent="ScreenSpace"]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+text = "wave info"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="ScreenSpace/OpenRightPanelButton" to="." method="_on_open_right_panel_button_pressed"]

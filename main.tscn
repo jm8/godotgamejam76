@@ -455,12 +455,11 @@ texture = ExtResource("1_hl6sv")
 
 [node name="PipeTileMap" type="TileMapLayer" parent="."]
 position = Vector2(-64, -55.5)
-tile_map_data = PackedByteArray("AAD8////AAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_6l7am")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-64, -55.5)
-tile_map_data = PackedByteArray("AAABAP//BgAAAAAAAAABAAAABgAAAAAAAAAAAP//BgAAAAAAAAAAAAEABgAAAAAAAAD//wAABgAAAAAAAAD/////BgAAAAAAAAAAAAAAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wAABgAAAAAAAAD/////BgAAAAAAAAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAABAAAABgAAAAAAAAAAAAEABgAAAAAAAAAAAAAAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_4ps7g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
