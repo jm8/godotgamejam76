@@ -5,8 +5,12 @@ class_name Tower
 
 @export var tower_tile_position: Vector2i
 
-var temperature: float = 260
+var temperature: float = 260:
+	set(value): set_temperature(value)
 var specific_heat: float = 2
+
+func set_temperature(value):
+	temperature = value
 
 func _ready() -> void:
 	add_to_group(Globulars.TOWER_GROUP)
