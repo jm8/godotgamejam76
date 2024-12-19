@@ -9,7 +9,7 @@ var cooldown_timer: float = cooldown_time
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if temperature < min_temperature:
-		queue_free()
+		delete()
 		return
 
 	$TemperatureBar.value = temperature

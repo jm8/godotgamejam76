@@ -7,6 +7,7 @@ const EnemySlowScene = preload("res://enemy_slow.tscn")
 var wave_duration = 10
 var time_between_waves = 30
 var time_between_enemies = 5
+var enemy_health_multipier = 1
 
 var is_in_wave = false
 
@@ -55,7 +56,8 @@ func _process(delta: float) -> void:
 		if time_til_next_wave <= 0:
 			is_in_wave = true
 			time_between_enemies = 5 / (1.5 * wave_num)
-			wave_duration = 25 + 5 * wave_num
+			wave_duration = 30 + 5 * (wave_num - 1)
+			enemy_health_multipier = 1 + 0.2 * (wave_num - 1)
 			time_til_wave_ends = wave_duration
 			time_til_next_enemy = time_between_enemies
 			
@@ -66,5 +68,6 @@ func spawn_enemy():
 		enemy = EnemyScene.instantiate()
 	else:
 		enemy = EnemySlowScene.instantiate()
+	enemy.health = enemy.base_health * enemy_health_multipier
 	enemy.curve = enemy_paths.pick_random()
 	add_child(enemy)

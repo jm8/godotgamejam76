@@ -9,8 +9,10 @@ var offset = Vector2(0, 0)
 
 @export var enemy_name = "basic enemy"
 @export var speed = 200
-@export var health = 10
+@export var base_health = 10
 @export var qc_damage = 1
+
+var health: float
 
 func _ready() -> void:
 	global_position = curve.sample(0, 0)
