@@ -24,6 +24,7 @@ Globulars="*res://globulars.gd"
 2d_physics/layer_1="enemy"
 2d_physics/layer_2="range"
 2d_physics/layer_3="qc"
+2d_physics/layer_4="ally-projectile"
 
 [rendering]
 

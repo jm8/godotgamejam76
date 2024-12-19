@@ -8,6 +8,10 @@ class_name Tower
 var temperature: float = 260
 var specific_heat: float = 2
 
+const min_temperature: float = 220
+const operating_temperature: float = 261
+const max_temperature: float = 400
+
 func _ready() -> void:
 	add_to_group(Globulars.TOWER_GROUP)
 

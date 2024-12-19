@@ -2,9 +2,6 @@ extends Tower
 
 const fire_time: float = 0.5
 const cooldown_time: float = 1
-const min_temperature: float = 220
-const operating_temperature: float = 261
-const max_temperature: float = 400
 
 var fire_timer: float = 0
 var cooldown_timer: float = 1
