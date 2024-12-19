@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var buttons = %TowerButtonsContainer
 @onready var tower_description = %TowerDescription
+@onready var enemy_spawner = get_parent().get_node("EnemySpawner")
 var CreateTowerButton = preload("res://create_tower_button.tscn")
 
 var placing_tower_type: TowerType
@@ -40,6 +41,12 @@ func _ready() -> void:
 		selected_tower.delete()
 		close_right_panel()
 	)
+
+func _process(_delta: float) -> void:
+	if enemy_spawner.is_in_wave:
+		%WaveInfo.text = "Wave ends in " + str(ceil(enemy_spawner.time_til_wave_ends))
+	else:
+		%WaveInfo.text = "Wave starts in " + str(ceil(enemy_spawner.time_til_next_wave))
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed && event.keycode == KEY_ESCAPE:

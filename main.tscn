@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dngtl5cyn65dc" path="res://pipe.png" id="6_t7h3a"]
 [ext_resource type="PackedScene" uid="uid://bqhenjbs0gb5y" path="res://ui.tscn" id="7_t056u"]
 [ext_resource type="Script" path="res://enemy_spawner.gd" id="12_ujn84"]
-[ext_resource type="PackedScene" path="res://quantum_computer.tscn" id="13_ujn78"]
+[ext_resource type="PackedScene" uid="uid://dda8tbm871lc7" path="res://quantum_computer.tscn" id="13_ujn78"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n32x6"]
 texture = ExtResource("6_t7h3a")
@@ -455,12 +455,11 @@ texture = ExtResource("1_hl6sv")
 
 [node name="PipeTileMap" type="TileMapLayer" parent="."]
 position = Vector2(-64, -55.5)
-tile_map_data = PackedByteArray("AAD8////AAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_6l7am")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-64, -55.5)
-tile_map_data = PackedByteArray("AAABAP//BgAAAAAAAAABAAAABgAAAAAAAAAAAP//BgAAAAAAAAAAAAEABgAAAAAAAAD//wAABgAAAAAAAAD/////BgAAAAAAAAAAAAAAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wAABgAAAAAAAAD/////BgAAAAAAAAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAABAAAABgAAAAAAAAAAAAEABgAAAAAAAAAAAAAAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_4ps7g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
