@@ -10,7 +10,7 @@ radius = 128.0
 radius = 906.691
 
 [node name="Node2D" type="Sprite2D"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_5lo5g")
 script = ExtResource("2_0anbp")
 
