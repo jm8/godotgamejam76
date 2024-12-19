@@ -44,9 +44,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if enemy_spawner.is_in_wave:
-		%WaveInfo.text = "Wave ends in " + str(ceil(enemy_spawner.time_til_wave_ends))
+		%WaveInfo.text = "Wave " + str(enemy_spawner.wave_num) + " ends in " + str(ceil(enemy_spawner.time_til_wave_ends))
 	else:
-		%WaveInfo.text = "Wave starts in " + str(ceil(enemy_spawner.time_til_next_wave))
+		%WaveInfo.text = "Wave " + str(enemy_spawner.wave_num) + " starts in " + str(ceil(enemy_spawner.time_til_next_wave))
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed && event.keycode == KEY_ESCAPE:

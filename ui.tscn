@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvn3ejb6iiia7" path="res://tower1.tscn" id="3_2qefs"]
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="4_7ptnu"]
 [ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="5_b3ajt"]
-[ext_resource type="PackedScene" uid="uid://cilmso611f8h4" path="res://tower2.tscn" id="5_qa87a"]
+[ext_resource type="PackedScene" path="res://tower2.tscn" id="5_qa87a"]
 [ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
 [ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
 [ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
@@ -18,9 +18,6 @@ name = "Tower 1"
 description = "First tower"
 texture = ExtResource("4_7ptnu")
 scene = ExtResource("3_2qefs")
-min_temperature = 260.0
-operating_temperature = 261.0
-max_temperature = 400.0
 
 [sub_resource type="Resource" id="Resource_6u0ym"]
 script = ExtResource("2_kjrny")
@@ -28,9 +25,6 @@ name = "Tower 2"
 description = "Second Tower"
 texture = ExtResource("5_b3ajt")
 scene = ExtResource("5_qa87a")
-min_temperature = 260.0
-operating_temperature = 261.0
-max_temperature = 400.0
 
 [sub_resource type="FontFile" id="FontFile_ra3ge"]
 subpixel_positioning = 0
