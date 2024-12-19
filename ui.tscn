@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bqhenjbs0gb5y"]
+[gd_scene load_steps=19 format=3 uid="uid://bqhenjbs0gb5y"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
 [ext_resource type="Texture2D" uid="uid://l7bu6rv8822x" path="res://left-arrow.png" id="2_c2y04"]
@@ -56,17 +56,63 @@ default_font_size = 32
 
 [sub_resource type="Resource" id="Resource_lbyey"]
 script = ExtResource("10_leyrp")
+count = 0
 name = "ASIC"
 description = "Mine cryptocurrency on an application specific integrated circuit"
+compute = 0
+quantum = 0
 base_price = 1
+base_income = 1
+waste_energy = 1
+additive_1 = 0
+multiplyer_1 = 1.0
+multiplyer_2 = 1.0
 tooltip = "this is my super cool fancy tool tip!!"
 
 [sub_resource type="Resource" id="Resource_pqsil"]
 script = ExtResource("10_leyrp")
+count = 0
 name = "CPU"
 description = "Mine cryptocurrency with a central processing unit"
+compute = 1
+quantum = 0
 base_price = 5
+base_income = 5
+waste_energy = 3
+additive_1 = 0
+multiplyer_1 = 1.0
+multiplyer_2 = 1.0
 tooltip = "the processing unit in the center"
+
+[sub_resource type="Resource" id="Resource_iojpc"]
+script = ExtResource("10_leyrp")
+count = 0
+name = "GPU"
+description = "A great way to massively parallelize operations"
+compute = 5
+quantum = 0
+base_price = 50
+base_income = 25
+waste_energy = 10
+additive_1 = 0
+multiplyer_1 = 1.0
+multiplyer_2 = 1.0
+tooltip = ""
+
+[sub_resource type="Resource" id="Resource_5gidg"]
+script = ExtResource("10_leyrp")
+count = 0
+name = "SpaceHeater"
+description = "Sometimes the world needs a little warmth"
+compute = 0
+quantum = 0
+base_price = 500
+base_income = 0
+waste_energy = 5000
+additive_1 = 0
+multiplyer_1 = 1.0
+multiplyer_2 = 1.0
+tooltip = ""
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
@@ -227,7 +273,7 @@ metadata/_tab_index = 0
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("9_wged7")
-upgrades = Array[ExtResource("10_leyrp")]([SubResource("Resource_lbyey"), SubResource("Resource_pqsil")])
+upgrades = Array[ExtResource("10_leyrp")]([SubResource("Resource_lbyey"), SubResource("Resource_pqsil"), SubResource("Resource_iojpc"), SubResource("Resource_5gidg")])
 metadata/_tab_index = 1
 
 [node name="Research" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
