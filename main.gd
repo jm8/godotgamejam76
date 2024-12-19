@@ -19,9 +19,12 @@ enum ActionState {
 var action_state: ActionState = ActionState.TowerPlacing
 
 func _process(_delta: float) -> void:
+	var mouse_tile_pos = position_to_tile(get_global_mouse_position())
 	if ui.placing_tower_type != null:
+		if not tower_being_placed.visible or position_to_tile(tower_being_placed.global_position) != mouse_tile_pos:
+			tower_being_placed.modulate = Color(0, 1, 0, 0.2) if can_place_tower(mouse_tile_pos) else Color(1, 0, 0, 0.2)
 		tower_being_placed.visible = true
-		tower_being_placed.global_position = tile_to_position(position_to_tile(get_global_mouse_position()))
+		tower_being_placed.global_position = tile_to_position(mouse_tile_pos)
 		tower_being_placed.texture = ui.placing_tower_type.texture
 	else:
 		tower_being_placed.visible = false
