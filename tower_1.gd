@@ -14,8 +14,7 @@ func set_temperature(value):
 	var next_range = temperature_range(value)
 	if previous_range != next_range:
 		set_bar_style(next_range)
-
-	temperature = value
+	return value
 
 enum TemperatureRange {
 	Low,
@@ -32,11 +31,11 @@ func set_bar_style(range: TemperatureRange):
 		TemperatureRange.High:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_HIGH)
 
-func temperature_range(temperature: float) -> TemperatureRange:
+func temperature_range(t: float) -> TemperatureRange:
 	var range = TemperatureRange.Low
-	if temperature > operating_temperature:
+	if t > operating_temperature:
 		range = TemperatureRange.Medium
-	if temperature > min_temperature + (max_temperature - min_temperature) * 0.8:
+	if t > min_temperature + (max_temperature - min_temperature) * 0.8:
 		range = TemperatureRange.High
 	return range
 
@@ -54,6 +53,8 @@ func _process(delta: float) -> void:
 	if temperature < min_temperature:
 		queue_free()
 		return
+		
+	$TemperatureBar.value = temperature
 
 	if temperature < operating_temperature:
 		$Laser.visible = false
