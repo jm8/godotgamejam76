@@ -22,18 +22,18 @@ var time = 0
 var wave_num = 1
 
 var enemy_paths = [
-	create_path([Vector2i(30, -15), Vector2i(0, 0)]),
-	create_path([Vector2i(30, 15), Vector2i(0, 0)]),
-	create_path([Vector2i(-30, -15), Vector2i(0, 0)]),
-	create_path([Vector2i(-30, 15), Vector2i(0, 0)]),
-	create_path([Vector2i(0, 30), Vector2i(0, 0)]),
-	create_path([Vector2i(0, -30), Vector2i(0, 0)]),
+	create_path([Vector2i(2, 8), Vector2i(2, 4), Vector2i(0, 3), Vector2i(0, 0)]),
+	create_path([Vector2i(6, 3), Vector2i(0, 0)]),
+	create_path([Vector2i(-6, 3), Vector2i(0, 0)]),
+	create_path([Vector2i(-6, -3), Vector2i(0, 0)]),
+	create_path([Vector2i(6, -3), Vector2i(0, 0)]),
+	create_path([Vector2i(0, -5), Vector2i(0, 0)]),
 ]
 
 func create_path(points: Array[Vector2i]) -> Curve2D:
 	var curve = Curve2D.new()
 	for point in points:
-		curve.add_point(Vector2(point.x * 64, (point.y + .5 * (point.x % 2)) * 111))
+		curve.add_point(Vector2(point.x * (64 + 55.5 / 2), (point.y + .5 * (point.x % 2)) * 111))
 	return curve
 
 func _ready() -> void:
