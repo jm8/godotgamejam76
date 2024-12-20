@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cilmso611f8h4"]
+[gd_scene load_steps=6 format=3 uid="uid://cvdyddoo271g4"]
 
-[ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="1_885hf"]
-[ext_resource type="Script" path="res://tower_2.gd" id="2_qths3"]
+[ext_resource type="Texture2D" uid="uid://bxafoqgpa3jxa" path="res://tower3.png" id="1_0dqe2"]
+[ext_resource type="Script" path="res://tower_3.gd" id="2_16r2j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4xva"]
-radius = 500.0
+radius = 400.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aujdp"]
 
@@ -13,13 +13,13 @@ bg_color = Color(0.80511, 0.537978, 7.70092e-07, 1)
 
 [node name="Sprite2D" type="Sprite2D"]
 position = Vector2(500, 500)
-texture = ExtResource("1_885hf")
-script = ExtResource("2_qths3")
+texture = ExtResource("1_0dqe2")
+script = ExtResource("2_16r2j")
 
-[node name="Range" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(1, 0.66)
 shape = SubResource("CircleShape2D_m4xva")
 
@@ -35,5 +35,5 @@ max_value = 400.0
 value = 260.0
 show_percentage = false
 
-[connection signal="area_entered" from="Range" to="." method="_on_range_area_entered"]
-[connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

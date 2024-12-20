@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqhenjbs0gb5y"]
+[gd_scene load_steps=23 format=3 uid="uid://bqhenjbs0gb5y"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
 [ext_resource type="Texture2D" uid="uid://l7bu6rv8822x" path="res://left-arrow.png" id="2_c2y04"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="4_7ptnu"]
 [ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="5_b3ajt"]
 [ext_resource type="PackedScene" uid="uid://cilmso611f8h4" path="res://tower2.tscn" id="5_qa87a"]
+[ext_resource type="PackedScene" uid="uid://cvdyddoo271g4" path="res://tower3.tscn" id="7_2rtxv"]
+[ext_resource type="Texture2D" uid="uid://bxafoqgpa3jxa" path="res://tower3.png" id="8_plews"]
 [ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
 [ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
 [ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
@@ -31,6 +33,16 @@ scene = ExtResource("5_qa87a")
 min_temperature = 0.0
 operating_temperature = 0.0
 max_temperature = 0.0
+
+[sub_resource type="Resource" id="Resource_wj76e"]
+script = ExtResource("2_kjrny")
+name = "Tower 3"
+description = "burns all nearby enemies"
+texture = ExtResource("8_plews")
+scene = ExtResource("7_2rtxv")
+min_temperature = 260.0
+operating_temperature = 270.0
+max_temperature = 400.0
 
 [sub_resource type="FontFile" id="FontFile_ra3ge"]
 subpixel_positioning = 0
@@ -123,7 +135,7 @@ tooltip = ""
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
-tower_types = Array[ExtResource("2_kjrny")]([SubResource("Resource_f37b2"), SubResource("Resource_6u0ym")])
+tower_types = Array[ExtResource("2_kjrny")]([SubResource("Resource_f37b2"), SubResource("Resource_6u0ym"), SubResource("Resource_wj76e")])
 
 [node name="ScreenSpace" type="CanvasLayer" parent="."]
 
