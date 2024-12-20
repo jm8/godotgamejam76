@@ -1,7 +1,7 @@
 extends Tower
 
-const fire_time: float = 0.5
-const cooldown_time: float = 1
+var fire_time: float = 0.5
+var cooldown_time: float = 1
 
 var fire_timer: float = 0
 var cooldown_timer: float = 1
@@ -46,6 +46,7 @@ func _ready() -> void:
 	upgrades.append(TowerUpgrade.new("Better Focusing", "Improves tower range", 100))
 	upgrades.append(TowerUpgrade.new("Blue Lasers", "Improves tower damage", 100))
 	upgrades.append(TowerUpgrade.new("Purple Lasers", "Combines red and blue lasers for maximum damage", 100))
+	upgrades.append(TowerUpgrade.new("Continuous lasing", "Improved cooling systems allow the laser to be fired continuously", 100))
 
 func handle_upgrade(index: int):
 	print("upgrade index: ", index)
@@ -55,6 +56,9 @@ func handle_upgrade(index: int):
 		$Laser.default_color = Color(0, 0, 1)
 	if index == 2:
 		$Laser.default_color = Color(1, 0, 1)
+	if index == 3:
+		cooldown_time = 0
+		fire_time = 100000
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

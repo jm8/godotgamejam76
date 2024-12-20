@@ -25,7 +25,7 @@ func _physics_process(delta: float):
 	var pipe = Globulars.pipes.get(tower_tile_position)
 	if pipe:
 		Globulars.average_temperature_tower(pipe, self, delta)
-	temperature -= 0.02 * delta * (temperature - 200) + delta
+	temperature -= 0.02 * delta * (temperature - 240) + delta
 
 func _process(delta: float) -> void:
 	pass
