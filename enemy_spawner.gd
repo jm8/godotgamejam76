@@ -19,7 +19,7 @@ var time_til_next_enemy = 0
 var time_til_wave_ends = 0
 
 var time = 0
-var wave_num = 1
+var wave_num = 50
 
 var enemy_paths = [
 	create_path([Vector2i(2, 8), Vector2i(2, 4), Vector2i(0, 3), Vector2i(0, 0)]),

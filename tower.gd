@@ -13,6 +13,8 @@ const min_temperature: float = 220
 const operating_temperature: float = 261
 const max_temperature: float = 400
 
+var upgrades: Array[TowerUpgrade] = []
+
 func set_temperature(value):
 	return value
 

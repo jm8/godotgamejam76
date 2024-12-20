@@ -20,7 +20,7 @@ script = ExtResource("2_ytg6s")
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(1, 0.66)
+scale = Vector2(1, 0.8)
 shape = SubResource("CircleShape2D_m4xva")
 
 [node name="Laser" type="Line2D" parent="."]

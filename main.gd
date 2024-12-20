@@ -53,7 +53,6 @@ func _process(_delta: float) -> void:
 			hover_tile_posision = tile_position
 
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
-			print("placing pipe ", tile_position)
 			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
 			var pipe = Pipe.new()
 			Globulars.pipes[tile_position] = pipe
@@ -66,7 +65,6 @@ func _process(_delta: float) -> void:
 			remove_pipe(tile_position)
 
 func remove_pipe(tile_position: Vector2i) -> void:
-	print("removing pipe ", tile_position)
 	pipe_tile_map.erase_cell(tile_position)
 	var pipe = Globulars.pipes[tile_position]
 	Globulars.pipes.erase(tile_position)

@@ -43,6 +43,18 @@ func _ready() -> void:
 	$TemperatureBar.min_value = min_temperature
 	$TemperatureBar.max_value = max_temperature
 	set_bar_style(temperature_range(temperature))
+	upgrades.append(TowerUpgrade.new("Better Focusing", "Improves tower range", 100))
+	upgrades.append(TowerUpgrade.new("Blue Lasers", "Improves tower damage", 100))
+	upgrades.append(TowerUpgrade.new("Purple Lasers", "Combines red and blue lasers for maximum damage", 100))
+
+func handle_upgrade(index: int):
+	print("upgrade index: ", index)
+	if index == 0:
+		$Area2D/CollisionShape2D.shape.radius = 800
+	if index == 1 and not upgrades[2].purchased:
+		$Laser.default_color = Color(0, 0, 1)
+	if index == 2:
+		$Laser.default_color = Color(1, 0, 1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,7 +77,13 @@ func _process(delta: float) -> void:
 				$Laser.visible = true
 				$Laser.points[1] = to_local(target.global_position)
 				self.temperature -= 15 * delta
-				target.health -= 10 * delta
+				var damage = 10
+				if upgrades[1].purchased:
+					damage += 10
+				if upgrades[2].purchased:
+					damage += 30
+				
+				target.health -= damage * delta
 		else:
 			$Laser.visible = false
 			fire_timer = 0

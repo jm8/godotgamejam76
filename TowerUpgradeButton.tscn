@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvoar0yc02bb5"]
+
+[ext_resource type="Script" path="res://tower_upgrade_button.gd" id="1_5hle7"]
+
+[node name="Upgrade" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5hle7")
+
+[node name="Left" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Left"]
+layout_mode = 2
+text = "Title"
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="Left"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Description"
+autowrap_mode = 3
+
+[node name="Right" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="Right"]
+layout_mode = 2

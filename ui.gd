@@ -4,6 +4,7 @@ extends Node2D
 @onready var tower_description = %TowerDescription
 @onready var enemy_spawner = get_parent().get_node("EnemySpawner")
 var CreateTowerButton = preload("res://create_tower_button.tscn")
+var TowerUpgradeButtonScene = preload("res://TowerUpgradeButton.tscn")
 
 var placing_tower_type: TowerType
 var selected_tower: Tower
@@ -72,3 +73,22 @@ func open_tower_panel(tower: Tower) -> void:
 	%PlaceTowerMenu.visible = false
 	%SelectedTowerDescription.text = tower.tower_type.name
 	%SelectedTowerMenu.visible = true
+	
+	for c in %SelectedTowerMenu.get_children():
+		if c is TowerUpgradeButton:
+			c.queue_free()
+	
+	var i: int = 0
+	for u in tower.upgrades:
+		var b: TowerUpgradeButton = TowerUpgradeButtonScene.instantiate()
+		b.setup(u)
+		b.connect("gui_input", func (event: InputEvent):
+			if event is InputEventMouseButton and event.button_mask & MOUSE_BUTTON_MASK_LEFT != 0:
+				if not u.purchased and Globulars.crypto >= u.cost:
+					Globulars.crypto -= u.cost
+					u.purchased = true
+					tower.handle_upgrade(i)
+					b.setup(u)
+		)
+		%SelectedTowerMenu.add_child(b)
+		i += 1
