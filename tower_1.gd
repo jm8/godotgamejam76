@@ -87,7 +87,7 @@ func _process(delta: float) -> void:
 				if upgrades[2].purchased:
 					damage += 30
 				
-				target.health -= damage * delta
+				target.damage(damage * delta)
 		else:
 			$Laser.visible = false
 			fire_timer = 0

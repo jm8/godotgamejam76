@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwhoon85xunt0"]
+
+[ext_resource type="PackedScene" uid="uid://dnax868mpg7yy" path="res://enemy.tscn" id="1_4rso2"]
+[ext_resource type="Script" path="res://evader.gd" id="2_gj7gu"]
+[ext_resource type="Texture2D" uid="uid://dt6a3lvrptch7" path="res://evader.png" id="2_veowx"]
+
+[node name="Evader" instance=ExtResource("1_4rso2")]
+script = ExtResource("2_gj7gu")
+enemy_name = "ninja"
+base_health = 20
+
+[node name="Enemy" parent="." index="1"]
+texture = ExtResource("2_veowx")

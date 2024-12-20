@@ -56,6 +56,7 @@ func _process(delta: float) -> void:
 	temperature -= 12 * delta
 	
 	var targets = $Area2D.get_overlapping_areas()
-	for target in targets.map( func (x): return x.get_parent() ):
+	for target in targets.map(func(x): return x.get_parent()):
 		if target is Enemy:
+			# cannot be evaded
 			target.health -= 4 * delta

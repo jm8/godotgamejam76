@@ -2,6 +2,7 @@ extends Node2D
 
 const EnemyScene = preload("res://enemy.tscn")
 const EnemySlowScene = preload("res://enemy_slow.tscn")
+const EvaderEnemyScene = preload("res://evader.tscn")
 
 # parameters
 var wave_duration = 10
@@ -12,7 +13,7 @@ var enemy_health_multipier = 1
 var is_in_wave = false
 
 # if not in wave
-var time_til_next_wave = 30
+var time_til_next_wave = 0
 
 # if in wave
 var time_til_next_enemy = 0
@@ -65,10 +66,11 @@ func _process(delta: float) -> void:
 
 func spawn_enemy():
 	var enemy: Enemy
-	if randi_range(0, 1) == 1:
-		enemy = EnemyScene.instantiate()
-	else:
-		enemy = EnemySlowScene.instantiate()
+	# if randi_range(0, 1) == 1:
+	# 	enemy = EnemyScene.instantiate()
+	# else:
+	# 	enemy = EnemySlowScene.instantiate()
+	enemy = EvaderEnemyScene.instantiate()
 	enemy.health = enemy.base_health * enemy_health_multipier
 	enemy.curve = enemy_paths.pick_random()
 	add_child(enemy)

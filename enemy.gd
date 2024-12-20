@@ -31,3 +31,6 @@ func _process(delta: float) -> void:
 	
 	if health <= 0:
 		queue_free()
+
+func damage(amount: float):
+	health -= amount

@@ -17,8 +17,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if not pierce:
 			for e in $BlastRadius.get_overlapping_areas():
 				if e.get_parent() is Enemy:
-					e.get_parent().health -= damage
+					e.get_parent().damage(damage)
 			visible = false
 			queue_free()
 		else:
-			area.get_parent().health -= damage
+			area.get_parent().damage(damage)
