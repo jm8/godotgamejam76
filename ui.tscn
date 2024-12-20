@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bvn3ejb6iiia7" path="res://tower1.tscn" id="3_2qefs"]
 [ext_resource type="Texture2D" uid="uid://dxmmtsy0sjag8" path="res://tower.png" id="4_7ptnu"]
 [ext_resource type="Texture2D" uid="uid://c8on2t3ono7jo" path="res://tower2.png" id="5_b3ajt"]
-[ext_resource type="PackedScene" uid="uid://cilmso611f8h4" path="res://tower2.tscn" id="5_qa87a"]
-[ext_resource type="PackedScene" uid="uid://cvdyddoo271g4" path="res://tower3.tscn" id="7_2rtxv"]
+[ext_resource type="PackedScene" path="res://tower2.tscn" id="5_qa87a"]
+[ext_resource type="PackedScene" path="res://tower3.tscn" id="7_2rtxv"]
 [ext_resource type="Texture2D" uid="uid://bxafoqgpa3jxa" path="res://tower3.png" id="8_plews"]
 [ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
 [ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
@@ -310,6 +310,8 @@ offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 10
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 text = "wave info"
 horizontal_alignment = 1
 

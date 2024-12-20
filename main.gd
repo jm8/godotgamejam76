@@ -118,7 +118,16 @@ func handle_right_click(pos: Vector2i):
 	pass
 
 func can_place_tower(pos: Vector2i) -> bool:
-	return pos != Vector2i(0, 0) and not Globulars.towers_by_position.has(pos)
+	if pos == Vector2i(0, 0):
+		# quantum computer
+		return false
+	if Globulars.towers_by_position.has(pos):
+		# on top of tower
+		return false
+	if $TileMapLayer.get_cell_atlas_coords(pos).y in [4, 5, 6]:
+		# y coordinates on texture atlas for paths
+		return false
+	return true
 
 func has_pipe(tile_position: Vector2i) -> bool:
 	return pipe_tile_map.get_cell_source_id(tile_position) == PIPE_TILE_SOURCE_ID

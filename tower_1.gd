@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 		return
 
 	#print("targets " + name + ": ", get_tree().get_nodes_in_group("targets" + name))
-	var target: Enemy = get_tree().get_first_node_in_group("targets" + name)
+	var target = aquire_target()
 	if fire_timer > 0:
 		if target:
 			if len($Laser.points) == 2:
@@ -100,7 +100,13 @@ func _process(delta: float) -> void:
 		if cooldown_timer <= 0 and target:
 			fire_timer = fire_time
 
-
+func aquire_target() -> Enemy:
+	var closest_enemy: Enemy = null
+	for enemy: Enemy in get_tree().get_nodes_in_group("targets" + name):
+		if closest_enemy == null or enemy.distance_to_qc < closest_enemy.distance_to_qc:
+			closest_enemy = enemy
+	return closest_enemy
+	
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Enemy:
 		area.get_parent().add_to_group("targets" + name)
