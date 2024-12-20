@@ -12,6 +12,11 @@ var offset = Vector2(0, 0)
 @export var base_health = 10
 @export var qc_damage = 1
 
+
+var distance_to_qc:
+	get():
+		return curve.get_baked_length() - speed * t
+
 var health: float
 
 func _ready() -> void:
