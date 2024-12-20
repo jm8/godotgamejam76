@@ -18,6 +18,7 @@ var time_til_next_wave = 30
 var time_til_next_enemy = 0
 var time_til_wave_ends = 0
 
+# progress
 var time = 0
 var wave_num = 1
 
