@@ -30,6 +30,9 @@ func _physics_process(delta: float):
 func _process(delta: float) -> void:
 	pass
 
+func handle_upgrade(index: int):
+	pass
+
 func delete():
 	Globulars.towers_by_position.erase(tower_tile_position)
 	queue_free()

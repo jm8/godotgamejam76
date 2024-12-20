@@ -40,6 +40,10 @@ func _ready() -> void:
 	$TemperatureBar.min_value = min_temperature
 	$TemperatureBar.max_value = max_temperature
 	set_bar_style(temperature_range(temperature))
+	upgrades.append(TowerUpgrade.new("Hotter Fireballs", "makes the fireballs hotter, increasing damage", 100))
+	upgrades.append(TowerUpgrade.new("Tritium", "greatly increases the size of fireball explosions", 100))
+	upgrades.append(TowerUpgrade.new("Negative Temperature", "negative temperature fireballs are actually hotter than infite temperature, massively increasing damage", 100))
+	upgrades.append(TowerUpgrade.new("Plasma Blaster", "fireballs no longer explode on impact, but pierce infinitely", 100))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -61,6 +65,20 @@ func _process(delta: float) -> void:
 		var fireball: Fireball = fireball_scene.instantiate()
 		var rotation: float = global_position.direction_to(target.global_position).angle()
 		fireball.global_rotation = rotation
+		
+		if upgrades[0].purchased:
+			fireball.damage += 20
+		if upgrades[1].purchased:
+			if upgrades[3].purchased:
+				fireball.scale *= 1.5
+			else:
+				fireball.get_node("BlastRadius/CollisionShape2D").shape.radius = 1500
+		if upgrades[2].purchased:
+			fireball.damage += 60
+		if upgrades[3].purchased:
+			fireball.pierce = true
+			fireball.scale *= 1.5
+			fireball.speed += 1500
 		add_child(fireball)
 		cooldown_timer = cooldown_time
 	
