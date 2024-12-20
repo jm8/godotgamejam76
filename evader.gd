@@ -1,7 +1,7 @@
 extends Enemy
 
 
-var evade_chance = .25
+var evade_chance = .5
 var evade_length = .5
 var evade_cooldown = .5
 
