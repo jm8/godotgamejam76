@@ -12,7 +12,7 @@ var enemy_health_multipier = 1
 var is_in_wave = false
 
 # if not in wave
-var time_til_next_wave = 30
+var time_til_next_wave = 10
 
 # if in wave
 var time_til_next_enemy = 0
