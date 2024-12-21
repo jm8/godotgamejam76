@@ -59,6 +59,10 @@ func average_temperature(a: Vector2i, b: Vector2i, delta: float):
 	var difference = pipes[a].temperature - pipes[b].temperature
 	pipes[a].temperature -= difference * rate * delta / pipes[a].specific_heat
 	pipes[b].temperature += difference * rate * delta / pipes[b].specific_heat
+	if (pipes[b].temperature > pipes[a].temperature and difference > 0) or (pipes[b].temperature < pipes[a].temperature and difference < 0):
+		var avg = (pipes[a].temperature + pipes[b].temperature) / 2
+		pipes[a].temperature = avg
+		pipes[b].temperature = avg
 
 func average_temperature_tower(pipe: Pipe, tower: Tower, delta: float):
 	var rate = pipe.transfer_rate

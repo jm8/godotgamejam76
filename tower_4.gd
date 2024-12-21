@@ -14,7 +14,7 @@ enum TemperatureRange {
 }
 
 var transfer_rate: float = 6
-var efficency: float = 0.5
+var efficency: float = 0.4
 
 func set_bar_style(temperature_range: TemperatureRange):
 	match temperature_range:
@@ -38,6 +38,15 @@ func _ready() -> void:
 	$TemperatureBar.min_value = min_temperature
 	$TemperatureBar.max_value = max_temperature
 	set_bar_style(get_temperature_range(temperature))
+	upgrades.append(TowerUpgrade.new("", "improves efficency", 100))
+	upgrades.append(TowerUpgrade.new("", "increases transfer rate", 100))
+
+func handle_upgrade(index: int):
+	super.handle_upgrade(index)
+	if index == 0:
+		efficency += 0.4
+	if index == 1:
+		transfer_rate += 2
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)

@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func handle_upgrade(_index: int):
-	pass
+	specific_heat += 1.0
 
 func delete():
 	Globulars.towers_by_position.erase(tower_tile_position)

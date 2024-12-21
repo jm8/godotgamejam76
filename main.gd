@@ -151,18 +151,31 @@ func create_tower(pos: Vector2i, tower_type: TowerType) -> Tower:
 	Globulars.towers_by_position[pos] = tower
 	return tower
 
+var amortization: int = 4
+var amortization_counter: int = 0
 
 func update_pipes(map: TileMapLayer, delta: float):
 	# updates are order dependent, probably not a real issue
-	for pos in Globulars.pipes:
+	var adelta = delta * amortization
+	for i in range(0, len(Globulars.pipes), amortization):
+		if i + amortization_counter >= len(Globulars.pipes):
+			break
+		var pos = Globulars.pipes.keys()[i + amortization_counter]
 		var neighbors = [
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE),
-		].filter(func(neighbor): return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
+		]if randf() > 0.5  else [
+			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_SIDE),
+			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE),
+			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE),
+		]
+		neighbors = neighbors.filter(func(neighbor): return pipe_tile_map.get_cell_source_id(neighbor) == PIPE_TILE_SOURCE_ID)
 		for neighbor in neighbors:
-			Globulars.average_temperature(pos, neighbor, delta)
+			Globulars.average_temperature(pos, neighbor, adelta)
 		var pipe = Globulars.pipes[pos]
-		pipe.temperature -= 2 * delta
+		pipe.temperature -= 2 * adelta
 		if pipe.temperature < pipe.min_temperature:
 			remove_pipe(pos)
+	
+	amortization_counter = (amortization_counter + 1) % amortization
