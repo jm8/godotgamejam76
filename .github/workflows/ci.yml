@@ -169,6 +169,6 @@ jobs:
         GH_TOKEN: ${{ github.token }}
       run: |
         gh release create ${{ steps.tag-name.outputs.tagname }} -t "release" -n "Game release (${{ steps.tag-name.outputs.tagname }})"
-        gh release upload ${{ steps.tag-name.outputs.tagname }} mac
-        gh release upload ${{ steps.tag-name.outputs.tagname }} linux
-        gh release upload ${{ steps.tag-name.outputs.tagname }} windows
+        gh release upload ${{ steps.tag-name.outputs.tagname }} mac.zip
+        gh release upload ${{ steps.tag-name.outputs.tagname }} linux.zip
+        gh release upload ${{ steps.tag-name.outputs.tagname }} windows.zip
