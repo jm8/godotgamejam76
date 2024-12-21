@@ -54,5 +54,6 @@ func _process(delta: float) -> void:
 func transfer_heat(delta: float) -> void:
 	var qc = get_tree().root.get_node("Node2D/QuantumComputer")
 	var difference = temperature - qc.temperature
-	temperature -= efficency * difference * transfer_rate * delta / specific_heat
-	qc.temperature += difference * transfer_rate * delta / qc.specific_heat
+	if difference < 0:
+		temperature -= efficency * difference * transfer_rate * delta / specific_heat
+		qc.temperature += difference * transfer_rate * delta / qc.specific_heat

@@ -5,6 +5,7 @@ var cooldown_time: float = 1
 
 var fire_timer: float = 0
 var cooldown_timer: float = 1
+var hue: float = 0
 
 func set_temperature(value):
 	var previous_range = temperature_range(temperature)
@@ -47,6 +48,7 @@ func _ready() -> void:
 	upgrades.append(TowerUpgrade.new("Blue Lasers", "Improves tower damage", 100))
 	upgrades.append(TowerUpgrade.new("Purple Lasers", "Combines red and blue lasers for maximum damage", 100))
 	upgrades.append(TowerUpgrade.new("Continuous lasing", "Improved cooling systems allow the laser to be fired continuously", 100))
+	upgrades.append(TowerUpgrade.new("Disco Laser", "With every wavelength I've got!", 100))
 
 func handle_upgrade(index: int):
 	print("upgrade index: ", index)
@@ -73,6 +75,10 @@ func _process(delta: float) -> void:
 		$Laser.visible = false
 		return
 
+	if upgrades[4].purchased:
+		hue += delta
+		$Laser.default_color = Color.from_hsv(hue, 1.0, 1.0)
+
 	#print("targets " + name + ": ", get_tree().get_nodes_in_group("targets" + name))
 	var target = aquire_target()
 	if fire_timer > 0:
@@ -85,6 +91,8 @@ func _process(delta: float) -> void:
 				if upgrades[1].purchased:
 					damage += 10
 				if upgrades[2].purchased:
+					damage += 30
+				if upgrades[4].purchased:
 					damage += 30
 				
 				target.damage(damage * delta)
