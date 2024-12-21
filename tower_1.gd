@@ -51,7 +51,6 @@ func _ready() -> void:
 	upgrades.append(TowerUpgrade.new("Disco Laser", "With every wavelength I've got!", 100))
 
 func handle_upgrade(index: int):
-	print("upgrade index: ", index)
 	if index == 0:
 		$Area2D/CollisionShape2D.shape.radius = 800
 	if index == 1 and not upgrades[2].purchased:
