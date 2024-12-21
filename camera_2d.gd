@@ -11,9 +11,9 @@ func _input(event: InputEvent) -> void:
 
 	zoom.x = clamp(zoom.x, Globulars.min_zoom, Globulars.max_zoom)
 	zoom.y = clamp(zoom.y, Globulars.min_zoom, Globulars.max_zoom)
-	limit_top = -1000 - 100 * Globulars.wave_num
-	limit_bottom = 1000 + 100 * Globulars.wave_num
-	limit_left = -1000 - 100 * Globulars.wave_num
-	limit_right = 1000 + 100 * Globulars.wave_num
+	limit_top = -Globulars.BASE_LIMIT_Y - Globulars.LIMIT_Y_RATE * Globulars.wave_num
+	limit_bottom = Globulars.BASE_LIMIT_Y + Globulars.LIMIT_Y_RATE * Globulars.wave_num
+	limit_left = -Globulars.BASE_LIMIT_X - Globulars.LIMIT_X_RATE * Globulars.wave_num
+	limit_right = Globulars.BASE_LIMIT_X + Globulars.LIMIT_X_RATE * Globulars.wave_num
 	Globulars.min_zoom = .9 - 0.1 * Globulars.wave_num
 	

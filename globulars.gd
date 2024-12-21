@@ -12,7 +12,7 @@ const PROGRESS_MEDIUM = preload("res://progress_colors/medium.tres")
 const PROGRESS_LOW = preload("res://progress_colors/low.tres")
 const SOUND_COINS = preload("res://sounds/coins.mp3")
 const DEATH_SOUND = preload("res://sounds/death.mp3")
-const PIPE_COST = 10
+const PIPE_COST = 10 #DEPREICETED
 
 @onready var audio_stream = get_node("/root/Node2D/AudioStreamPlayer2D") as AudioStreamPlayer2D
 
@@ -23,6 +23,14 @@ var crypto: float = 10
 var qc_heating: float = 0
 
 var wave_num: int = 1
+var PIPE_COST_BASE = 5
+var PIPE_COST_COEFFICIENT = 3
+var LIMIT_X_RATE: int = 100
+var LIMIT_Y_RATE: int = 100
+var BASE_LIMIT_X: int = 1000
+var BASE_LIMIT_Y: int = 1000
+
+
 
 func play_coins_sound():
 	play_sound(SOUND_COINS, -15, randf_range(0.9, 1.1))

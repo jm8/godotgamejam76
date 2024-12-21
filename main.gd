@@ -51,11 +51,12 @@ func _process(_delta: float) -> void:
 		if !has_pipe(tile_position):
 			pipe_tile_map.set_cell(tile_position, HOVER_PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
 			hover_tile_posision = tile_position
-
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position) and Globulars.PIPE_COST <= Globulars.crypto:
-			Globulars.crypto -= Globulars.PIPE_COST
+		
+		var pipe_cost = pow(Globulars.PIPE_COST_BASE, (abs(tile_position[0]) + abs(tile_position[1]))/ Globulars.PIPE_COST_COEFFICIENT) + 10	
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position) and pipe_cost <= Globulars.crypto:
+			Globulars.crypto -= pipe_cost
 			Globulars.play_coins_sound()
-			add_child(DispersingText.create(get_global_mouse_position(), "-10 crypto", Color.RED))
+			add_child(DispersingText.create(get_global_mouse_position(), ("-%s crypto" % str(pipe_cost)), Color.RED))
 			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
 			var pipe = Pipe.new()
 			Globulars.pipes[tile_position] = pipe
@@ -65,7 +66,7 @@ func _process(_delta: float) -> void:
 			add_child(pipe_scene)
 
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
-			var amount = int(Globulars.PIPE_COST * 0.7)
+			var amount = int(pipe_cost* 0.7)
 			Globulars.crypto += amount
 			Globulars.play_get_coins_sound()
 			add_child(DispersingText.create(get_global_mouse_position(), "+" + str(amount) + " crypto", Color.GREEN))
