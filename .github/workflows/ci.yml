@@ -134,3 +134,37 @@ jobs:
         with:
           name: mac
           path: build/mac
+          
+  release:
+    name: Release
+    runs-on: ubuntu-20.04
+    needs:
+      - export-windows
+      - export-linux
+      - export-mac
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: mac
+    
+    - uses: actions/download-artifact@v4
+      with:
+        name: linux
+
+    - uses: actions/download-artifact@v4
+      with:
+        name: windows
+
+    - name: Get tag name
+      id: tag-name
+      run: |
+        echo "tagname=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+    - name: Release
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh release create ${{ steps.tag-name.outputs.tagname }} -t "release" -n "Game release (${{ steps.tag-name.outputs.tagname }})"
+        gh release upload ${{ steps.tag-name.outputs.tagname }} mac
+        gh release upload ${{ steps.tag-name.outputs.tagname }} linux
+        gh release upload ${{ steps.tag-name.outputs.tagname }} windows
