@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqhenjbs0gb5y"]
+[gd_scene load_steps=32 format=3 uid="uid://bqhenjbs0gb5y"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_7tofr"]
 [ext_resource type="Texture2D" uid="uid://l7bu6rv8822x" path="res://left-arrow.png" id="2_c2y04"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://2u6v0rgg5h88" path="res://tower4.tscn" id="9_y8wxc"]
 [ext_resource type="Texture2D" uid="uid://m13wkfldwqhl" path="res://tower4.png" id="10_5rgrq"]
 [ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
+[ext_resource type="Script" path="res://research-ui.gd" id="16_gwsyj"]
+[ext_resource type="Script" path="res://ResearchOpportunity.gd" id="17_b7ede"]
 
 [sub_resource type="Resource" id="Resource_f37b2"]
 script = ExtResource("2_kjrny")
@@ -148,6 +150,34 @@ additive_1 = 0
 multiplyer_1 = 1.0
 multiplyer_2 = 1.0
 tooltip = ""
+
+[sub_resource type="Resource" id="Resource_gm5yy"]
+script = ExtResource("17_b7ede")
+name = "Better Pipes"
+description = "Makes Pipes Better"
+classical_cost = 100.0
+quantum_cost = 0.0
+
+[sub_resource type="Resource" id="Resource_te7f6"]
+script = ExtResource("17_b7ede")
+name = "Quantum Computing"
+description = "Allows for the purchase of quantum computing devices"
+classical_cost = 100.0
+quantum_cost = 0.0
+
+[sub_resource type="Resource" id="Resource_hhd5f"]
+script = ExtResource("17_b7ede")
+name = "Fireball Tower"
+description = "A new tower that shoots exploding fireballs at enemies"
+classical_cost = 100.0
+quantum_cost = 0.0
+
+[sub_resource type="Resource" id="Resource_0ts37"]
+script = ExtResource("17_b7ede")
+name = "Incinerator Tower"
+description = "A tower that burns all nearby enemies"
+classical_cost = 100.0
+quantum_cost = 0.0
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_7tofr")
@@ -299,24 +329,21 @@ horizontal_alignment = 2
 
 [node name="TabContainer" type="TabContainer" parent="ScreenSpace/IdleGame/LeftPanel"]
 layout_mode = 2
-current_tab = 1
-
-[node name="Actions" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 0
+current_tab = 0
 
 [node name="Upgrades" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("9_wged7")
 upgrades = Array[ExtResource("10_leyrp")]([SubResource("Resource_lbyey"), SubResource("Resource_pqsil"), SubResource("Resource_iojpc"), SubResource("Resource_5gidg")])
-metadata/_tab_index = 1
+metadata/_tab_index = 0
 
 [node name="Research" type="VBoxContainer" parent="ScreenSpace/IdleGame/LeftPanel/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+script = ExtResource("16_gwsyj")
+research_opportunities = Array[ExtResource("17_b7ede")]([SubResource("Resource_gm5yy"), SubResource("Resource_te7f6"), SubResource("Resource_hhd5f"), SubResource("Resource_0ts37")])
+metadata/_tab_index = 1
 
 [node name="WaveInfo" type="Label" parent="ScreenSpace"]
 unique_name_in_owner = true

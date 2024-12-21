@@ -43,3 +43,5 @@ layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("1_2upqj")
 texture_pressed = ExtResource("2_7qkay")
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

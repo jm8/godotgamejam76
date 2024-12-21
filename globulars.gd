@@ -4,6 +4,8 @@ var min_zoom = 0.05
 var max_zoom = 2.0
 var zoom_change_factor = 0.1
 
+var researching: int = -1
+
 const TOWER_GROUP = "tower"
 const PIPE_GROUP = "pipe"
 
@@ -76,3 +78,6 @@ func average_temperature_qc(pipe: Pipe, qc: QuantumComputer, delta: float):
 	var difference = pipe.temperature - qc.temperature
 	pipe.temperature -= difference * rate * delta / pipe.specific_heat
 	qc.temperature += difference * rate * delta / qc.specific_heat
+
+func handle_upgrade(index: int):
+	print("finished upgrade ", index)
