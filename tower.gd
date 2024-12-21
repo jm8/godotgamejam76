@@ -27,10 +27,10 @@ func _physics_process(delta: float):
 		Globulars.average_temperature_tower(pipe, self, delta)
 	temperature -= 0.02 * delta * (temperature - 240) + delta
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func handle_upgrade(index: int):
+func handle_upgrade(_index: int):
 	pass
 
 func delete():
