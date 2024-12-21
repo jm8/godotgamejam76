@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
 	$Health.text = str(round(health))
 	
 	if health <= 0:
+		Globulars.play_death_sound()
 		queue_free()
 
 func damage(amount: float):

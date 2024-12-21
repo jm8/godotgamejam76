@@ -11,6 +11,7 @@ const PROGRESS_HIGH = preload("res://progress_colors/high.tres")
 const PROGRESS_MEDIUM = preload("res://progress_colors/medium.tres")
 const PROGRESS_LOW = preload("res://progress_colors/low.tres")
 const SOUND_COINS = preload("res://sounds/coins.mp3")
+const DEATH_SOUND = preload("res://sounds/death.mp3")
 const PIPE_COST = 10
 
 @onready var audio_stream = get_node("/root/Node2D/AudioStreamPlayer2D") as AudioStreamPlayer2D
@@ -22,8 +23,22 @@ var crypto: float = 10
 var qc_heating: float = 0
 
 func play_coins_sound():
-	audio_stream.stream = SOUND_COINS
-	audio_stream.play()
+	play_sound(SOUND_COINS, -15, randf_range(0.9, 1.1))
+
+
+func play_death_sound():
+	play_sound(DEATH_SOUND, -5, randf_range(1, 2))
+
+
+static func play_sound(audio: AudioStream, volume_db: float = 0, pitch: float = 1) -> void:
+	var audio_player := AudioStreamPlayer2D.new()
+	audio_player.stream = audio
+	audio_player.pitch_scale = pitch
+	audio_player.volume_db = volume_db
+	Engine.get_main_loop().root.add_child(audio_player)
+	audio_player.play()
+	await audio_player.finished
+	audio_player.queue_free()
 
 func average_temperature(a: Vector2i, b: Vector2i, delta: float):
 	var rate = min(pipes[a].transfer_rate, pipes[b].transfer_rate)
