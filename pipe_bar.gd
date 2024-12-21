@@ -9,14 +9,14 @@ func _ready() -> void:
 	$TemperatureBar.min_value = pipe.min_temperature
 	$TemperatureBar.max_value = pipe.max_temperature
 	add_to_group(Globulars.PIPE_GROUP)
-	set_bar_style(temperature_range(pipe.temperature))
+	set_bar_style(get_temperature_range(pipe.temperature))
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Label.text = str(round(pipe.temperature * 100) / 100.)
 	$TemperatureBar.value = pipe.temperature
 
-	var previous_range = temperature_range(previous_temperature)
-	var next_range = temperature_range(pipe.temperature)
+	var previous_range = get_temperature_range(previous_temperature)
+	var next_range = get_temperature_range(pipe.temperature)
 	if previous_range != next_range:
 		set_bar_style(next_range)
 
@@ -26,8 +26,8 @@ enum TemperatureRange {
 	High
 }
 
-func set_bar_style(range: TemperatureRange):
-	match range:
+func set_bar_style(temperature_range: TemperatureRange):
+	match temperature_range:
 		TemperatureRange.Low:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_LOW)
 		TemperatureRange.Medium:
@@ -35,13 +35,13 @@ func set_bar_style(range: TemperatureRange):
 		TemperatureRange.High:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_HIGH)
 
-func temperature_range(temperature: float) -> TemperatureRange:
-	var range = TemperatureRange.Low
+func get_temperature_range(temperature: float) -> TemperatureRange:
+	var temperature_range = TemperatureRange.Low
 	if temperature > pipe.min_temperature + (pipe.max_temperature - pipe.min_temperature) * 0.2:
-		range = TemperatureRange.Medium
+		temperature_range = TemperatureRange.Medium
 	if temperature > pipe.min_temperature + (pipe.max_temperature - pipe.min_temperature) * 0.8:
-		range = TemperatureRange.High
-	return range
+		temperature_range = TemperatureRange.High
+	return temperature_range
 
 func display() -> void:
 	self.modulate.a = 1

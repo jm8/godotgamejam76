@@ -1,8 +1,8 @@
 extends Tower
 
 func set_temperature(value):
-	var previous_range = temperature_range(temperature)
-	var next_range = temperature_range(value)
+	var previous_range = get_temperature_range(temperature)
+	var next_range = get_temperature_range(value)
 	if previous_range != next_range:
 		set_bar_style(next_range)
 	return value
@@ -16,8 +16,8 @@ enum TemperatureRange {
 var transfer_rate: float = 6
 var efficency: float = 0.5
 
-func set_bar_style(range: TemperatureRange):
-	match range:
+func set_bar_style(temperature_range: TemperatureRange):
+	match temperature_range:
 		TemperatureRange.Low:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_LOW)
 		TemperatureRange.Medium:
@@ -25,19 +25,19 @@ func set_bar_style(range: TemperatureRange):
 		TemperatureRange.High:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_HIGH)
 
-func temperature_range(t: float) -> TemperatureRange:
-	var range = TemperatureRange.Low
+func get_temperature_range(t: float) -> TemperatureRange:
+	var temperature_range = TemperatureRange.Low
 	if t > operating_temperature:
-		range = TemperatureRange.Medium
+		temperature_range = TemperatureRange.Medium
 	if t > min_temperature + (max_temperature - min_temperature) * 0.8:
-		range = TemperatureRange.High
-	return range
+		temperature_range = TemperatureRange.High
+	return temperature_range
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TemperatureBar.min_value = min_temperature
 	$TemperatureBar.max_value = max_temperature
-	set_bar_style(temperature_range(temperature))
+	set_bar_style(get_temperature_range(temperature))
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if temperature < min_temperature:
 		delete()
 		return

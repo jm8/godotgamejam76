@@ -114,7 +114,7 @@ func handle_left_click(pos: Vector2i):
 		if tower != null:
 			ui.open_tower_panel(tower)
 
-func handle_right_click(pos: Vector2i):
+func handle_right_click(_pos: Vector2i):
 	pass
 
 func can_place_tower(pos: Vector2i) -> bool:

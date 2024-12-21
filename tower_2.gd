@@ -7,8 +7,8 @@ var cooldown_time: float = 2
 var cooldown_timer: float = cooldown_time
 
 func set_temperature(value):
-	var previous_range = temperature_range(temperature)
-	var next_range = temperature_range(value)
+	var previous_range = get_temperature_range(temperature)
+	var next_range = get_temperature_range(value)
 	if previous_range != next_range:
 		set_bar_style(next_range)
 	return value
@@ -19,8 +19,8 @@ enum TemperatureRange {
 	High
 }
 
-func set_bar_style(range: TemperatureRange):
-	match range:
+func set_bar_style(temperature_range: TemperatureRange):
+	match temperature_range:
 		TemperatureRange.Low:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_LOW)
 		TemperatureRange.Medium:
@@ -28,18 +28,18 @@ func set_bar_style(range: TemperatureRange):
 		TemperatureRange.High:
 			$TemperatureBar.add_theme_stylebox_override("fill", Globulars.PROGRESS_HIGH)
 
-func temperature_range(t: float) -> TemperatureRange:
-	var range = TemperatureRange.Low
+func get_temperature_range(t: float) -> TemperatureRange:
+	var temperature_range = TemperatureRange.Low
 	if t > operating_temperature:
-		range = TemperatureRange.Medium
+		temperature_range = TemperatureRange.Medium
 	if t > min_temperature + (max_temperature - min_temperature) * 0.8:
-		range = TemperatureRange.High
-	return range
+		temperature_range = TemperatureRange.High
+	return temperature_range
 
 func _ready() -> void:
 	$TemperatureBar.min_value = min_temperature
 	$TemperatureBar.max_value = max_temperature
-	set_bar_style(temperature_range(temperature))
+	set_bar_style(get_temperature_range(temperature))
 	upgrades.append(TowerUpgrade.new("Hotter Fireballs", "makes the fireballs hotter, increasing damage", 100))
 	upgrades.append(TowerUpgrade.new("Tritium", "greatly increases the size of fireball explosions", 100))
 	upgrades.append(TowerUpgrade.new("Negative Temperature", "negative temperature fireballs are actually hotter than infite temperature, massively increasing damage", 100))
@@ -63,8 +63,8 @@ func _process(delta: float) -> void:
 	if cooldown_timer <= 0 and target:
 		temperature -= 10
 		var fireball: Fireball = fireball_scene.instantiate()
-		var rotation: float = global_position.direction_to(target.global_position).angle()
-		fireball.global_rotation = rotation
+		var rot: float = global_position.direction_to(target.global_position).angle()
+		fireball.global_rotation = rot
 		
 		if upgrades[0].purchased:
 			fireball.damage += 20
