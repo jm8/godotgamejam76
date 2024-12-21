@@ -20,14 +20,14 @@ func create_buttons():
 		buttons.add_child(button)
 		button.mouse_entered.connect(func():
 			if placing_tower_type == null:
-				tower_description.text = tower_type.description
+				tower_description.text = tower_type.description + "\n\nCost: " + str(tower_type.cost)
 		)
 		button.pressed.connect(func():
 			if placing_tower_type != null and placing_tower_type.name == tower_type.name:
 				placing_tower_type = null
 			else:
 				placing_tower_type = tower_type
-				tower_description.text = tower_type.description
+				tower_description.text = tower_type.description + "\n\nCost: " + str(tower_type.cost)
 		)
 
 
@@ -85,6 +85,7 @@ func open_tower_panel(tower: Tower) -> void:
 		b.connect("gui_input", func (event: InputEvent):
 			if event is InputEventMouseButton and event.button_mask & MOUSE_BUTTON_MASK_LEFT != 0:
 				if not u.purchased and Globulars.crypto >= u.cost:
+					Globulars.play_coins_sound()
 					Globulars.crypto -= u.cost
 					u.purchased = true
 					tower.handle_upgrade(i)

@@ -636,3 +636,5 @@ modulate = Color(0, 1, 0, 0.196078)
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("12_ujn84")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

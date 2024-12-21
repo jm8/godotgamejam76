@@ -20,5 +20,5 @@ func _process(delta: float) -> void:
 		quantum += upgrade.count * upgrade.quantum
 
 	
-	%ResourceLabel.text = "Crypto: %s\nClassical: %s\nQuantum:%s" % [floor(Globulars.crypto), classical, quantum]
+	%ResourceLabel.text = "Crypto: %s\nClassical: %s\nQuantum: %s" % [floor(Globulars.crypto), classical, quantum]
 	%PowerLabel.text = "%skW" % Globulars.qc_heating

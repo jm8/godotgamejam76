@@ -18,6 +18,7 @@ func _ready() -> void:
 			if event is InputEventMouseButton and event.button_mask & MOUSE_BUTTON_MASK_LEFT != 0:
 				var cost = floor(upgrade.base_price * pow(1.1, upgrade.count))
 				if Globulars.crypto >= cost:
+					Globulars.play_coins_sound()
 					upgrade.count += 1
 					Globulars.crypto -= cost
 					b.get_node("Right/Count").text = str(upgrade.count)

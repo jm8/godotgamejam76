@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bxafoqgpa3jxa" path="res://tower3.png" id="8_plews"]
 [ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
 [ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
-[ext_resource type="PackedScene" uid="uid://2u6v0rgg5h88" path="res://tower4.tscn" id="9_y8wxc"]
+[ext_resource type="PackedScene" uid="uid://unw116ljpdar" path="res://tower4.tscn" id="9_y8wxc"]
 [ext_resource type="Texture2D" uid="uid://m13wkfldwqhl" path="res://tower4.png" id="10_5rgrq"]
 [ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
 
@@ -22,6 +22,7 @@ name = "Tower 1"
 description = "First tower"
 texture = ExtResource("4_7ptnu")
 scene = ExtResource("3_2qefs")
+cost = 100.0
 min_temperature = 0.0
 operating_temperature = 0.0
 max_temperature = 0.0
@@ -32,6 +33,7 @@ name = "Tower 2"
 description = "Second Tower"
 texture = ExtResource("5_b3ajt")
 scene = ExtResource("5_qa87a")
+cost = 100.0
 min_temperature = 0.0
 operating_temperature = 0.0
 max_temperature = 0.0
@@ -42,6 +44,7 @@ name = "Tower 3"
 description = "burns all nearby enemies"
 texture = ExtResource("8_plews")
 scene = ExtResource("7_2rtxv")
+cost = 100.0
 min_temperature = 260.0
 operating_temperature = 270.0
 max_temperature = 400.0
@@ -52,6 +55,7 @@ name = "Heat Teleporter"
 description = "Teleports Heat"
 texture = ExtResource("10_5rgrq")
 scene = ExtResource("9_y8wxc")
+cost = 100.0
 min_temperature = 260.0
 operating_temperature = 260.0
 max_temperature = 800.0
@@ -87,7 +91,7 @@ default_font_size = 32
 
 [sub_resource type="Resource" id="Resource_lbyey"]
 script = ExtResource("10_leyrp")
-count = 0
+count = 1
 name = "ASIC"
 description = "Mine cryptocurrency on an application specific integrated circuit"
 compute = 0
@@ -193,6 +197,7 @@ expand_icon = true
 [node name="PlaceTowerMenu" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TowerButtonsContainer" type="GridContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer/PlaceTowerMenu"]
 unique_name_in_owner = true
@@ -209,6 +214,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
+fit_content = true
 
 [node name="SelectedTowerMenu" type="VBoxContainer" parent="ScreenSpace/RightPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

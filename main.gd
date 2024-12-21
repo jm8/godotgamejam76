@@ -52,7 +52,9 @@ func _process(_delta: float) -> void:
 			pipe_tile_map.set_cell(tile_position, HOVER_PIPE_TILE_SOURCE_ID, Vector2i.ZERO)
 			hover_tile_posision = tile_position
 
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position):
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position) and Globulars.PIPE_COST <= Globulars.crypto:
+			Globulars.crypto -= Globulars.PIPE_COST
+			Globulars.play_coins_sound()
 			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
 			var pipe = Pipe.new()
 			Globulars.pipes[tile_position] = pipe
@@ -106,7 +108,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		handle_right_click(tile_position)
 
 func handle_left_click(pos: Vector2i):
-	if action_state == ActionState.TowerPlacing and ui.placing_tower_type != null and can_place_tower(pos):
+	if action_state == ActionState.TowerPlacing and ui.placing_tower_type != null and can_place_tower(pos) and ui.placing_tower_type.cost <= Globulars.crypto:
+		Globulars.crypto -= ui.placing_tower_type.cost
+		Globulars.play_coins_sound()
 		var tower = create_tower(pos, ui.placing_tower_type)
 		add_child(tower)
 	elif action_state == ActionState.TowerPlacing and ui.placing_tower_type == null:

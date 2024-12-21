@@ -10,12 +10,20 @@ const PIPE_GROUP = "pipe"
 const PROGRESS_HIGH = preload("res://progress_colors/high.tres")
 const PROGRESS_MEDIUM = preload("res://progress_colors/medium.tres")
 const PROGRESS_LOW = preload("res://progress_colors/low.tres")
+const SOUND_COINS = preload("res://sounds/coins.mp3")
+const PIPE_COST = 10
+
+@onready var audio_stream = get_node("/root/Node2D/AudioStreamPlayer2D") as AudioStreamPlayer2D
 
 var pipes: Dictionary
 var towers_by_position: Dictionary
 
 var crypto: float = 10
 var qc_heating: float = 0
+
+func play_coins_sound():
+	audio_stream.stream = SOUND_COINS
+	audio_stream.play()
 
 func average_temperature(a: Vector2i, b: Vector2i, delta: float):
 	var rate = min(pipes[a].transfer_rate, pipes[b].transfer_rate)
