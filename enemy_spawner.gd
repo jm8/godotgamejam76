@@ -64,6 +64,8 @@ func _process(delta: float) -> void:
 			enemy_health_multipier = 1 + 0.2 * (wave_num - 1)
 			time_til_wave_ends = wave_duration
 			time_til_next_enemy = time_between_enemies
+	
+	Globulars.wave_num = wave_num
 			
 
 func spawn_enemy():

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bxafoqgpa3jxa" path="res://tower3.png" id="8_plews"]
 [ext_resource type="Script" path="res://idle_game_ui.gd" id="8_xbyhy"]
 [ext_resource type="Script" path="res://upgrades.gd" id="9_wged7"]
-[ext_resource type="PackedScene" uid="uid://unw116ljpdar" path="res://tower4.tscn" id="9_y8wxc"]
+[ext_resource type="PackedScene" uid="uid://2u6v0rgg5h88" path="res://tower4.tscn" id="9_y8wxc"]
 [ext_resource type="Texture2D" uid="uid://m13wkfldwqhl" path="res://tower4.png" id="10_5rgrq"]
 [ext_resource type="Script" path="res://upgrade.gd" id="10_leyrp"]
 

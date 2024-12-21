@@ -22,6 +22,8 @@ var towers_by_position: Dictionary
 var crypto: float = 10
 var qc_heating: float = 0
 
+var wave_num: int = 1
+
 func play_coins_sound():
 	play_sound(SOUND_COINS, -15, randf_range(0.9, 1.1))
 
