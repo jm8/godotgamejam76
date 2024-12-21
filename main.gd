@@ -55,6 +55,7 @@ func _process(_delta: float) -> void:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !has_pipe(tile_position) and Globulars.PIPE_COST <= Globulars.crypto:
 			Globulars.crypto -= Globulars.PIPE_COST
 			Globulars.play_coins_sound()
+			add_child(DispersingText.create(get_global_mouse_position(), "-10 crypto", Color.RED))
 			pipe_tile_map.set_cells_terrain_connect([tile_position], 0, 0)
 			var pipe = Pipe.new()
 			Globulars.pipes[tile_position] = pipe
@@ -64,6 +65,10 @@ func _process(_delta: float) -> void:
 			add_child(pipe_scene)
 
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and has_pipe(tile_position):
+			var amount = int(Globulars.PIPE_COST * 0.7)
+			Globulars.crypto += amount
+			Globulars.play_get_coins_sound()
+			add_child(DispersingText.create(get_global_mouse_position(), "+" + str(amount) + " crypto", Color.GREEN))
 			remove_pipe(tile_position)
 
 func remove_pipe(tile_position: Vector2i) -> void:
@@ -111,6 +116,7 @@ func handle_left_click(pos: Vector2i):
 	if action_state == ActionState.TowerPlacing and ui.placing_tower_type != null and can_place_tower(pos) and ui.placing_tower_type.cost <= Globulars.crypto:
 		Globulars.crypto -= ui.placing_tower_type.cost
 		Globulars.play_coins_sound()
+		add_child(DispersingText.create(get_global_mouse_position(), "-" + str(ui.placing_tower_type.cost) + " crypto", Color.RED))
 		var tower = create_tower(pos, ui.placing_tower_type)
 		add_child(tower)
 	elif action_state == ActionState.TowerPlacing and ui.placing_tower_type == null:

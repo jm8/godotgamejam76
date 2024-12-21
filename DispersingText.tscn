@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0gxvpq7ilyxu"]
+
+[ext_resource type="Script" path="res://dispersing_text.gd" id="1_cecak"]
+
+[sub_resource type="Curve2D" id="Curve2D_b4hrm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, -50)
+}
+point_count = 2
+
+[node name="DispersingText" type="Node2D"]
+script = ExtResource("1_cecak")
+curve = SubResource("Curve2D_b4hrm")
+
+[node name="Label" type="Label" parent="."]
+z_index = 4
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -23.0
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "-10 crypto"

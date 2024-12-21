@@ -26,6 +26,10 @@ func play_coins_sound():
 	play_sound(SOUND_COINS, -15, randf_range(0.9, 1.1))
 
 
+func play_get_coins_sound():
+	play_sound(SOUND_COINS, -15, randf_range(1.2, 1.3))
+
+
 func play_death_sound():
 	play_sound(DEATH_SOUND, -5, randf_range(1, 2))
 
