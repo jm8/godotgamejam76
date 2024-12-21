@@ -30,7 +30,8 @@ var LIMIT_Y_RATE: int = 100
 var BASE_LIMIT_X: int = 1000
 var BASE_LIMIT_Y: int = 1000
 
-
+var classical: float = 0
+var quantum: float = 0
 
 func play_coins_sound():
 	play_sound(SOUND_COINS, -15, randf_range(0.9, 1.1))

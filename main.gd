@@ -165,7 +165,7 @@ func update_pipes(map: TileMapLayer, delta: float):
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE),
-		]if randf() > 0.5  else [
+		]if randf() > 0.5 else [
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE),
 			map.get_neighbor_cell(pos, TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE),

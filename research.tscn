@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkwwth503ms67"]
+
+[ext_resource type="Texture2D" uid="uid://d1m4b2wgvsnkc" path="res://play_button.png" id="1_2upqj"]
+[ext_resource type="Script" path="res://research.gd" id="1_yoadt"]
+[ext_resource type="Texture2D" uid="uid://d1k2mjlk4k2dl" path="res://pause_button.png" id="2_7qkay"]
+
+[node name="Research" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yoadt")
+
+[node name="Left" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Left"]
+layout_mode = 2
+text = "Title"
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="Left"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Description"
+autowrap_mode = 3
+
+[node name="Center" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Progress" type="Label" parent="Center"]
+layout_mode = 2
+text = "10%"
+
+[node name="Cost" type="Label" parent="Center"]
+layout_mode = 2
+text = "600 Classical"
+
+[node name="PlayButton" type="TextureButton" parent="."]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("1_2upqj")
+texture_pressed = ExtResource("2_7qkay")
