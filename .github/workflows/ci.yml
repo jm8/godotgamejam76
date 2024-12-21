@@ -168,6 +168,7 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
+        find .
         gh release create ${{ steps.tag-name.outputs.tagname }} -t "release" -n "Game release (${{ steps.tag-name.outputs.tagname }})"
         gh release upload ${{ steps.tag-name.outputs.tagname }} mac.zip
         gh release upload ${{ steps.tag-name.outputs.tagname }} linux.zip
